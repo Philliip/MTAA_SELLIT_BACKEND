@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import datetime
 
 import sentry_sdk
 from dotenv import load_dotenv
@@ -22,6 +23,7 @@ LOG_DIR = os.path.join(BASE_DIR, 'logs')
 PRIVATE_DIR = os.path.join(BASE_DIR, 'private')
 
 DEFAULT_IMAGE = os.path.join(PRIVATE_DIR, 'images/users/default_image.jpg')
+OBJECT_CHECKERS_MODULE = 'apps.core.checkers'
 
 # .env
 if os.path.exists(ENV_FILE):
@@ -40,6 +42,8 @@ SECRET_KEY = 'oqjwv$mob^(qwlil^8ub8%a@o5@a!^x0j1*^*1m@y46k%(6$+w'
 DEBUG = False
 
 ALLOWED_HOSTS = []
+
+TOKEN_EXPIRATION = datetime.timedelta(days=7)
 
 
 # Application definition

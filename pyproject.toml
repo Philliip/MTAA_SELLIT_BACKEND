@@ -16,6 +16,8 @@ django-imap-backend = "^0"
 django-celery-beat = "^2.2.0"
 redis = "^4.0"
 django_api_forms = "1.0.0rc7"
+django-filter = "^22.1"
+django-object-checker = "^1.0.2"
 
 [tool.poetry.dev-dependencies]
 fabric = "^2.6.0"

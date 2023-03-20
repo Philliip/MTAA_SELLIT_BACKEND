@@ -10,5 +10,5 @@ class City(BaseModel):
         default_permissions = ()
 
     name = models.CharField(max_length=255, null=False, verbose_name=_('city_name'))
-    psc = models.CharField(max_length=10, null=False, verbose_name=_('city_zip'))
+    zip = models.CharField(max_length=10, null=False, verbose_name=_('city_zip'))
 
