@@ -21,6 +21,8 @@ ENV_FILE = os.path.join(BASE_DIR, '.env')
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 PRIVATE_DIR = os.path.join(BASE_DIR, 'private')
 
+DEFAULT_IMAGE = os.path.join(PRIVATE_DIR, 'images/users/default_image.jpg')
+
 # .env
 if os.path.exists(ENV_FILE):
     load_dotenv(dotenv_path=ENV_FILE, verbose=True)
