@@ -1,7 +1,10 @@
 from django.forms import fields
-from django_api_forms import Form, FieldList
+from django_api_forms import Form, FieldList, FormFieldList
 from django import forms
-from apps.core.models import Category, City
+from apps.core.models import Category, City, Image
+import django_api_forms
+from django.conf import settings
+from apps.api.forms.image import ImageForm
 
 class OfferForm:
     class Update(Form):
@@ -10,7 +13,7 @@ class OfferForm:
         price = forms.DecimalField(max_digits=5, decimal_places=2)
         city_id = forms.ModelChoiceField(queryset=City.objects.all(), required=True)
         category_id = forms.ModelChoiceField(queryset=Category.objects.all(), required=True)
-        images = FieldList(field=fields.ImageField(), max_length=5)
+        images = FormFieldList(form=ImageForm.Create, required=False)
 
     class Create(Update):
         pass

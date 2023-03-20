@@ -27,6 +27,7 @@ class OfferManagement(SecuredView):
 
         offer = Offer()
         form.populate(offer)
+        offer.user = request.user
         offer.save()
 
         for image in form.cleaned_data.get('images', []):

@@ -15,7 +15,7 @@ from apps.api.filters.user import UserFilter
 from apps.api.forms.user import UserForm
 from apps.api.response import SingleResponse, PaginationResponse
 from django.http import FileResponse
-from object_checker.base_object_checker import has_object_permission
+
 
 
 from apps.core.models.user import User
@@ -73,8 +73,7 @@ class UserDetail(SecuredView):
             raise ValidationException(request, form)
 
         user = _get_user(request, user_id)
-        if not has_object_permission('check_user', user=request.user, obj=user):
-            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
+
 
         if User.objects.filter(email=form.cleaned_data['email']).exclude(pk=user.id).exists():
             raise ProblemDetailException(
@@ -89,8 +88,7 @@ class UserDetail(SecuredView):
     @transaction.atomic
     def delete(self, request, user_id: UUID):
         user = _get_user(request, user_id)
-        if not has_object_permission('check_user', user=request.user, obj=user):
-            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
+
         user.delete()
 
         return SingleResponse(request)
@@ -120,8 +118,7 @@ class UserProfileImage(SecuredView):
 
         user = _get_user(request, user_id)
 
-        if not has_object_permission('check_user', user=request.user, obj=user):
-            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
+
 
         user.image.save(name=f"{uuid.uuid4()}{mimetypes.guess_extension(form.cleaned_data['image'].content_type)}",
                         content=form.cleaned_data['image'])
@@ -132,8 +129,7 @@ class UserProfileImage(SecuredView):
     def delete(self, request, user_id: UUID):
 
         user = _get_user(request, user_id)
-        if not has_object_permission('check_user', user=request.user, obj=user):
-            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
+
 
         if user.image.path == settings.DEFAULT_IMAGE:
             raise ProblemDetailException(

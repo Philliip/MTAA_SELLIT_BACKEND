@@ -8,7 +8,7 @@ from apps.api.errors import ProblemDetailException
 from apps.core.models import Image
 from apps.api.views.base import SecuredView
 from apps.api.response import SingleResponse
-from object_checker.base_object_checker import has_object_permission
+
 
 
 class ImageDetail(SecuredView):
