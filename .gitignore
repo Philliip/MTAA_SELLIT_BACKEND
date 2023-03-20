@@ -7,7 +7,12 @@ node_modules/
 !logs/.gitkeep
 /media/*
 /private/*
+!/private/images/
+/private/images/*
+!/private/images/users/
+/private/images/users/*
 !/private/images/users/default_image.jpg
+
 !/media/.gitkeep
 *.DS_Store
 *.pyc
