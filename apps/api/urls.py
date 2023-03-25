@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apps.api.views import user, api_key, auth, city, category, image, offer
+from apps.api.views import user, api_key, auth, city, category, image, offer, chat
 
 urlpatterns = [
 
@@ -14,6 +14,7 @@ urlpatterns = [
     path('users/<uuid:user_id>', user.UserDetail.as_view()),
     path('users/me', user.UserMe.as_view()),
     path('users/<uuid:user_id>/image', user.UserProfileImage.as_view(), name='profile_image'),
+    path('users/<uuid:user_id>/chats', user.UserChat.as_view()),
 
     path('cities', city.CityManagement.as_view()),
     path('cities/<uuid:city_id>', city.CityDetail.as_view()),
@@ -25,6 +26,9 @@ urlpatterns = [
 
     path('offers', offer.OfferManagement.as_view()),
     path('offers/<uuid:offer_id>', offer.OfferDetail.as_view()),
+    path('offers/<uuid:offer_id>/chat', offer.OfferChatManagement.as_view()),
 
+    path('chats/<uuid:offer_chat_id>/users', chat.ChatUser.as_view()),
+    path('chats/<uuid:offer_chat_id>/messages', chat.ChatMessage.as_view()),
 
 ]

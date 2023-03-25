@@ -4,14 +4,15 @@ from uuid import UUID
 from django.db.models import F
 from apps.api.filters.offer import OfferFilter
 from apps.api.serializers.offer import OfferSerializer
+from apps.api.serializers.offer_chat import OfferChatSerializer
+from apps.api.serializers.offer_chat_user import OfferChatUserSerializer
 from apps.api.views.base import SecuredView
 from http import HTTPStatus
 from django.db import transaction
 from django.utils.translation import gettext as _
 from apps.api.errors import ValidationException, ProblemDetailException
 from apps.api.forms.offer import OfferForm
-from apps.core.models.offer import Offer
-from apps.core.models.image import Image
+from apps.core.models import OfferChat, Offer, Image, OfferChatUsers
 from apps.api.response import SingleResponse, PaginationResponse
 
 
@@ -36,7 +37,6 @@ class OfferManagement(SecuredView):
                 mime_type=image['image'].content_type,
                 offer_id=offer.pk,
 
-
             )
 
             image_obj.path.save(
@@ -51,20 +51,17 @@ class OfferManagement(SecuredView):
 
         return PaginationResponse(request, offers, serializer=OfferSerializer.Base)
 
+def _get_offer(request, offer_id: UUID) -> Offer:
+    try:
+        offer = Offer.objects.get(pk=offer_id)
+    except Offer.DoesNotExist as e:
+        raise ProblemDetailException(request, _("Offer not found"), status=HTTPStatus.NOT_FOUND, previous=e)
+    return offer
 class OfferDetail(SecuredView):
-
-
-    @staticmethod
-    def _get_offer(request, offer_id: UUID) -> Offer:
-        try:
-            offer = Offer.objects.get(pk=offer_id)
-        except Offer.DoesNotExist as e:
-            raise ProblemDetailException(request, _("Offer not found"), status=HTTPStatus.NOT_FOUND, previous=e)
-        return offer
 
     @transaction.atomic
     def get(self, request, offer_id: UUID):
-        offer = self._get_offer(request, offer_id)
+        offer = _get_offer(request, offer_id)
 
         offer.views = F('views') + 1
         offer.save(update_fields=['views'])
@@ -80,7 +77,7 @@ class OfferDetail(SecuredView):
         if not form.is_valid():
             raise ValidationException(request, form)
 
-        offer = self._get_offer(request, offer_id)
+        offer = _get_offer(request, offer_id)
 
         form.populate(offer)
 
@@ -101,7 +98,7 @@ class OfferDetail(SecuredView):
 
     @transaction.atomic
     def delete(self, request, offer_id: UUID):
-        offer = self._get_offer(request, offer_id)
+        offer = _get_offer(request, offer_id)
 
         images = offer.images.all()
         for image in images:
@@ -109,3 +106,20 @@ class OfferDetail(SecuredView):
         offer.hard_delete()
 
         return SingleResponse(request)
+
+
+class OfferChatManagement(SecuredView):
+    @transaction.atomic
+    def post(self, request, offer_id: UUID):
+
+        offer = _get_offer(request, offer_id)
+
+        try:
+            offer_chat = OfferChat.objects.get(offer_id=offer_id, chat_users__user=request.user)
+        except OfferChat.DoesNotExist:
+
+            offer_chat = OfferChat.objects.create(offer_id=offer_id)
+            OfferChatUsers.objects.create(offer_chat=offer_chat, user=offer.user, owner=True)
+            OfferChatUsers.objects.create(offer_chat=offer_chat, user=request.user)
+
+        return SingleResponse(request, offer_chat, serializer=OfferChatSerializer.Base, status=HTTPStatus.OK)

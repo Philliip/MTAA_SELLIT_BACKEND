@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 
     'apps.core',
     'apps.api',
+
 ]
 
 MIDDLEWARE = [

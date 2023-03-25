@@ -7,8 +7,10 @@ from uuid import UUID
 import hashlib
 
 from django.db import transaction
+from django.db.models import Prefetch, Subquery, OuterRef
 from django.utils.translation import gettext as _
 
+from apps.api.serializers.offer_chat import OfferChatSerializer
 from apps.api.views.base import SecuredView
 from apps.api.errors import ValidationException, ProblemDetailException
 from apps.api.filters.user import UserFilter
@@ -16,8 +18,7 @@ from apps.api.forms.user import UserForm
 from apps.api.response import SingleResponse, PaginationResponse
 from django.http import FileResponse
 
-
-
+from apps.core.models import OfferChat, Message
 from apps.core.models.user import User
 from apps.api.serializers.user import UserSerializer
 
@@ -118,8 +119,6 @@ class UserProfileImage(SecuredView):
 
         user = _get_user(request, user_id)
 
-
-
         user.image.save(name=f"{uuid.uuid4()}{mimetypes.guess_extension(form.cleaned_data['image'].content_type)}",
                         content=form.cleaned_data['image'])
 
@@ -129,7 +128,6 @@ class UserProfileImage(SecuredView):
     def delete(self, request, user_id: UUID):
 
         user = _get_user(request, user_id)
-
 
         if user.image.path == settings.DEFAULT_IMAGE:
             raise ProblemDetailException(
@@ -141,3 +139,27 @@ class UserProfileImage(SecuredView):
         user.save()
 
         return SingleResponse(request)
+
+
+class UserChat(SecuredView):
+
+    def get(self, request, user_id: UUID):
+
+        last_message = Message.objects.filter(offer_chat=OuterRef('pk')).order_by('-created_at')
+
+        if request.GET.get('owner'):
+            offer_chats = OfferChat.objects.filter(chat_users__user_id=user_id, chat_users__owner=True). \
+                annotate(last_message=Subquery(last_message.values('id')[:1])). \
+                prefetch_related(
+                Prefetch('messages', queryset=Message.objects.filter(
+                    id__in=Subquery(last_message.values('id')[:1])))). \
+                order_by('updated_at')
+        else:
+            offer_chats = OfferChat.objects.filter(chat_users__user_id=user_id, chat_users__owner=False). \
+                annotate(last_message=Subquery(last_message.values('id')[:1])). \
+                prefetch_related(
+                Prefetch('messages', queryset=Message.objects.filter(
+                    id__in=Subquery(last_message.values('id')[:1])))). \
+                order_by('updated_at')
+
+        return PaginationResponse(request, offer_chats, serializer=OfferChatSerializer.User)

@@ -19,3 +19,10 @@ class OfferSerializer:
     class Detail(Base):
         description: str
         created_at: datetime.datetime
+
+    class Chat(Serializer):
+        id: UUID
+        title: str
+        price: float
+
+

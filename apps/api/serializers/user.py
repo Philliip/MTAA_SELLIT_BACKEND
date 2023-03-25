@@ -18,3 +18,8 @@ class UserSerializer:
 
     class Me(Detail):
         pass
+
+    class Message(Serializer):
+        id: UUID
+        username: str
+        image_url: str

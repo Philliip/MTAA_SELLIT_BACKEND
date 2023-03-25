@@ -5,3 +5,7 @@ from .city import City
 from .image import Image
 from .category import Category
 from .offer import Offer
+from .location import Location
+from .offer_chat import OfferChat
+from .offer_chat_user import OfferChatUsers
+from .message import Message
