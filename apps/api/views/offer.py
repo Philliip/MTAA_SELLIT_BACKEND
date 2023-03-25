@@ -12,7 +12,7 @@ from django.db import transaction
 from django.utils.translation import gettext as _
 from apps.api.errors import ValidationException, ProblemDetailException
 from apps.api.forms.offer import OfferForm
-from apps.core.models import OfferChat, Offer, Image, OfferChatUsers
+from apps.core.models import OfferChat, Offer, Image, OfferChatUser
 from apps.api.response import SingleResponse, PaginationResponse
 
 
@@ -119,7 +119,7 @@ class OfferChatManagement(SecuredView):
         except OfferChat.DoesNotExist:
 
             offer_chat = OfferChat.objects.create(offer_id=offer_id)
-            OfferChatUsers.objects.create(offer_chat=offer_chat, user=offer.user, owner=True)
-            OfferChatUsers.objects.create(offer_chat=offer_chat, user=request.user)
+            OfferChatUser.objects.create(offer_chat=offer_chat, user=offer.user, owner=True)
+            OfferChatUser.objects.create(offer_chat=offer_chat, user=request.user)
 
         return SingleResponse(request, offer_chat, serializer=OfferChatSerializer.Base, status=HTTPStatus.OK)

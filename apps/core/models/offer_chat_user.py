@@ -2,7 +2,7 @@ from django.db import models
 from apps.core.models.base import BaseModel
 
 
-class OfferChatUsers(BaseModel):
+class OfferChatUser(BaseModel):
     class Meta:
         app_label = 'core'
         db_table = 'offers_chats_users'

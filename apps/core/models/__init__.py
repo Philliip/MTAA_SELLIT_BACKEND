@@ -7,5 +7,5 @@ from .category import Category
 from .offer import Offer
 from .location import Location
 from .offer_chat import OfferChat
-from .offer_chat_user import OfferChatUsers
+from .offer_chat_user import OfferChatUser
 from .message import Message

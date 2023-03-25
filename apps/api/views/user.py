@@ -149,17 +149,15 @@ class UserChat(SecuredView):
 
         if request.GET.get('owner'):
             offer_chats = OfferChat.objects.filter(chat_users__user_id=user_id, chat_users__owner=True). \
-                annotate(last_message=Subquery(last_message.values('id')[:1])). \
-                prefetch_related(
-                Prefetch('messages', queryset=Message.objects.filter(
-                    id__in=Subquery(last_message.values('id')[:1])))). \
-                order_by('updated_at')
+                annotate(last_message_id=Subquery(last_message.values('id')[:1])). \
+                annotate(last_message_content=Subquery(last_message.values('content')[:1])). \
+                annotate(last_message_user=Subquery(last_message.values('user__username')[:1])). \
+                order_by('-updated_at')
         else:
             offer_chats = OfferChat.objects.filter(chat_users__user_id=user_id, chat_users__owner=False). \
-                annotate(last_message=Subquery(last_message.values('id')[:1])). \
-                prefetch_related(
-                Prefetch('messages', queryset=Message.objects.filter(
-                    id__in=Subquery(last_message.values('id')[:1])))). \
-                order_by('updated_at')
+                annotate(last_message_id=Subquery(last_message.values('id')[:1])). \
+                annotate(last_message_content=Subquery(last_message.values('content')[:1])). \
+                annotate(last_message_user=Subquery(last_message.values('user__username')[:1])). \
+                order_by('-updated_at')
 
         return PaginationResponse(request, offer_chats, serializer=OfferChatSerializer.User)

@@ -49,6 +49,8 @@ TOKEN_EXPIRATION = datetime.timedelta(days=7)
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -60,6 +62,7 @@ INSTALLED_APPS = [
 
     'apps.core',
     'apps.api',
+    'apps.chat',
 
 ]
 
@@ -92,7 +95,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sellit_api.wsgi.application'
+ASGI_APPLICATION = 'sellit_api.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
 
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

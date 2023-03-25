@@ -11,12 +11,12 @@ from django.db import transaction
 from django.utils.translation import gettext as _
 from apps.api.errors import ValidationException, ProblemDetailException
 from apps.api.forms.offer import OfferForm
-from apps.core.models import OfferChat, Offer, Image, OfferChatUsers, Message
+from apps.core.models import OfferChat, Offer, Image, OfferChatUser, Message
 from apps.api.response import SingleResponse, PaginationResponse
 
 class ChatUser(SecuredView):
     def get(self, request, offer_chat_id: UUID):
-        offer_chat_users = OfferChatUsers.objects.filter(offer_chat_id=offer_chat_id)
+        offer_chat_users = OfferChatUser.objects.filter(offer_chat_id=offer_chat_id)
 
         return PaginationResponse(request, offer_chat_users, serializer=OfferChatUserSerializer.Base)
 
