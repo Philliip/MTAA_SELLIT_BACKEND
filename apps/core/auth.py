@@ -1,3 +1,4 @@
+import datetime
 from http import HTTPStatus
 from typing import Optional
 
@@ -25,6 +26,7 @@ class BearerBackend(ModelBackend):
                 _('Invalid Bearer Token'),
                 status=HTTPStatus.UNAUTHORIZED,
             )
+
 
         if not self.user_can_authenticate(token.user):
             raise ProblemDetailException(request, _('Inactive user.'), status=HTTPStatus.FORBIDDEN)

@@ -14,6 +14,7 @@ from apps.api.errors import ValidationException, ProblemDetailException
 from apps.api.forms.offer import OfferForm
 from apps.core.models import OfferChat, Offer, Image, OfferChatUser
 from apps.api.response import SingleResponse, PaginationResponse
+from object_checker.base_object_checker import has_object_permission
 
 
 class OfferManagement(SecuredView):
@@ -67,7 +68,7 @@ class OfferDetail(SecuredView):
         offer.save(update_fields=['views'])
         offer.refresh_from_db(fields=['views'])
 
-        return SingleResponse(request, offer, serializer=OfferSerializer.Detail)
+        return SingleResponse(request, offer, serializer=OfferSerializer.Detail, status=HTTPStatus.OK)
 
     @transaction.atomic
     def put(self, request, offer_id: UUID):
@@ -78,6 +79,9 @@ class OfferDetail(SecuredView):
             raise ValidationException(request, form)
 
         offer = _get_offer(request, offer_id)
+
+        if not has_object_permission('check_offer', user=request.user, obj=offer):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         form.populate(offer)
 
@@ -94,18 +98,21 @@ class OfferDetail(SecuredView):
                 f"{uuid.uuid4()}{mimetypes.guess_extension(image['image'].content_type)}", image['image']
             )
 
-        return SingleResponse(request, offer, serializer=OfferSerializer.Detail)
+        return SingleResponse(request, offer, serializer=OfferSerializer.Detail, status=HTTPStatus.OK)
 
     @transaction.atomic
     def delete(self, request, offer_id: UUID):
         offer = _get_offer(request, offer_id)
+
+        if not has_object_permission('check_offer', user=request.user, obj=offer):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         images = offer.images.all()
         for image in images:
             image.path.delete()
         offer.hard_delete()
 
-        return SingleResponse(request)
+        return SingleResponse(request, status=HTTPStatus.NO_CONTENT)
 
 
 class OfferChatManagement(SecuredView):
@@ -122,4 +129,4 @@ class OfferChatManagement(SecuredView):
             OfferChatUser.objects.create(offer_chat=offer_chat, user=offer.user, owner=True)
             OfferChatUser.objects.create(offer_chat=offer_chat, user=request.user)
 
-        return SingleResponse(request, offer_chat, serializer=OfferChatSerializer.Base, status=HTTPStatus.OK)
+        return SingleResponse(request, offer_chat, serializer=OfferChatSerializer.Base, status=HTTPStatus.CREATED)

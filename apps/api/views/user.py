@@ -22,6 +22,8 @@ from apps.core.models import OfferChat, Message
 from apps.core.models.user import User
 from apps.api.serializers.user import UserSerializer
 
+from object_checker.base_object_checker import has_object_permission
+
 
 def _get_user(request, user_id: UUID) -> User:
     try:
@@ -56,7 +58,7 @@ class UserManagement(SecuredView):
     def get(self, request):
         users = UserFilter(request.GET, queryset=User.objects.all(), request=request).qs
 
-        return PaginationResponse(request, users, serializer=UserSerializer.Base)
+        return PaginationResponse(request, users, serializer=UserSerializer.Base, status=HTTPStatus.OK)
 
 
 class UserDetail(SecuredView):
@@ -64,7 +66,7 @@ class UserDetail(SecuredView):
     def get(self, request, user_id: UUID):
         user = _get_user(request, user_id)
 
-        return SingleResponse(request, user, serializer=UserSerializer.Detail)
+        return SingleResponse(request, user, serializer=UserSerializer.Detail, status=HTTPStatus.OK)
 
     @transaction.atomic
     def put(self, request, user_id: UUID):
@@ -74,7 +76,8 @@ class UserDetail(SecuredView):
             raise ValidationException(request, form)
 
         user = _get_user(request, user_id)
-
+        if not has_object_permission('check_user', user=request.user, obj=user):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         if User.objects.filter(email=form.cleaned_data['email']).exclude(pk=user.id).exists():
             raise ProblemDetailException(
@@ -84,15 +87,16 @@ class UserDetail(SecuredView):
         form.populate(user)
         user.save()
 
-        return SingleResponse(request, user, serializer=UserSerializer.Detail)
+        return SingleResponse(request, user, serializer=UserSerializer.Detail, status=HTTPStatus.OK)
 
     @transaction.atomic
     def delete(self, request, user_id: UUID):
         user = _get_user(request, user_id)
-
+        if not has_object_permission('check_user', user=request.user, obj=user):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
         user.delete()
 
-        return SingleResponse(request)
+        return SingleResponse(request, status=HTTPStatus.NO_CONTENT)
 
 
 class UserMe(SecuredView):
@@ -118,16 +122,20 @@ class UserProfileImage(SecuredView):
             raise ValidationException(request, form)
 
         user = _get_user(request, user_id)
+        if not has_object_permission('check_user', user=request.user, obj=user):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         user.image.save(name=f"{uuid.uuid4()}{mimetypes.guess_extension(form.cleaned_data['image'].content_type)}",
                         content=form.cleaned_data['image'])
 
-        return SingleResponse(request, request.user, serializer=UserSerializer.Me)
+        return SingleResponse(request, request.user, serializer=UserSerializer.Me, status=HTTPStatus.OK)
 
     @transaction.atomic
     def delete(self, request, user_id: UUID):
 
         user = _get_user(request, user_id)
+        if not has_object_permission('check_user', user=request.user, obj=user):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         if user.image.path == settings.DEFAULT_IMAGE:
             raise ProblemDetailException(
@@ -138,12 +146,15 @@ class UserProfileImage(SecuredView):
         user.image = settings.DEFAULT_IMAGE
         user.save()
 
-        return SingleResponse(request)
+        return SingleResponse(request, status=HTTPStatus.NO_CONTENT)
 
 
 class UserChat(SecuredView):
 
     def get(self, request, user_id: UUID):
+
+        if not has_object_permission('check_user_chats', user=request.user, obj=user_id):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         last_message = Message.objects.filter(offer_chat=OuterRef('pk')).order_by('-created_at')
 
@@ -160,4 +171,5 @@ class UserChat(SecuredView):
                 annotate(last_message_user=Subquery(last_message.values('user__username')[:1])). \
                 order_by('-updated_at')
 
-        return PaginationResponse(request, offer_chats, serializer=OfferChatSerializer.User)
+        return PaginationResponse(request, offer_chats, serializer=OfferChatSerializer.User,
+                                  status=HTTPStatus.OK)
