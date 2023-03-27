@@ -68,7 +68,7 @@ class OfferDetail(SecuredView):
         offer.save(update_fields=['views'])
         offer.refresh_from_db(fields=['views'])
 
-        return SingleResponse(request, offer, serializer=OfferSerializer.Detail)
+        return SingleResponse(request, offer, serializer=OfferSerializer.Detail, status=HTTPStatus.OK)
 
     @transaction.atomic
     def put(self, request, offer_id: UUID):
@@ -98,7 +98,7 @@ class OfferDetail(SecuredView):
                 f"{uuid.uuid4()}{mimetypes.guess_extension(image['image'].content_type)}", image['image']
             )
 
-        return SingleResponse(request, offer, serializer=OfferSerializer.Detail)
+        return SingleResponse(request, offer, serializer=OfferSerializer.Detail, status=HTTPStatus.OK)
 
     @transaction.atomic
     def delete(self, request, offer_id: UUID):
@@ -112,7 +112,7 @@ class OfferDetail(SecuredView):
             image.path.delete()
         offer.hard_delete()
 
-        return SingleResponse(request)
+        return SingleResponse(request, status=HTTPStatus.NO_CONTENT)
 
 
 class OfferChatManagement(SecuredView):
@@ -129,4 +129,4 @@ class OfferChatManagement(SecuredView):
             OfferChatUser.objects.create(offer_chat=offer_chat, user=offer.user, owner=True)
             OfferChatUser.objects.create(offer_chat=offer_chat, user=request.user)
 
-        return SingleResponse(request, offer_chat, serializer=OfferChatSerializer.Base, status=HTTPStatus.OK)
+        return SingleResponse(request, offer_chat, serializer=OfferChatSerializer.Base, status=HTTPStatus.CREATED)

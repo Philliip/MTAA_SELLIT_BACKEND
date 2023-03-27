@@ -24,7 +24,8 @@ class ChatUser(SecuredView):
 
         offer_chat_users = OfferChatUser.objects.filter(offer_chat_id=offer_chat_id)
 
-        return PaginationResponse(request, offer_chat_users, serializer=OfferChatUserSerializer.Base)
+        return PaginationResponse(request, offer_chat_users, serializer=OfferChatUserSerializer.Base,
+                                  status=HTTPStatus.OK)
 
 class ChatMessage(SecuredView):
 
@@ -45,7 +46,7 @@ class ChatMessage(SecuredView):
                                      queryset=Message.objects.filter(offer_chat_id=offer_chat_id).all(),
                                      request=request).qs
 
-        return PaginationResponse(request, messages, serializer=MessageSerializer.Base)
+        return PaginationResponse(request, messages, serializer=MessageSerializer.Base, status=HTTPStatus.OK)
 
 class ChatMessagesDetail(SecuredView):
 
@@ -69,4 +70,4 @@ class ChatMessagesDetail(SecuredView):
 
         message.hard_delete()
 
-        return SingleResponse(request)
+        return SingleResponse(request, status=HTTPStatus.NO_CONTENT)
