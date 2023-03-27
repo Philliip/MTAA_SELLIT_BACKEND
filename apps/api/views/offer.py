@@ -14,6 +14,7 @@ from apps.api.errors import ValidationException, ProblemDetailException
 from apps.api.forms.offer import OfferForm
 from apps.core.models import OfferChat, Offer, Image, OfferChatUser
 from apps.api.response import SingleResponse, PaginationResponse
+from object_checker.base_object_checker import has_object_permission
 
 
 class OfferManagement(SecuredView):
@@ -79,6 +80,9 @@ class OfferDetail(SecuredView):
 
         offer = _get_offer(request, offer_id)
 
+        if not has_object_permission('check_offer', user=request.user, obj=offer):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
+
         form.populate(offer)
 
         offer.save()
@@ -99,6 +103,9 @@ class OfferDetail(SecuredView):
     @transaction.atomic
     def delete(self, request, offer_id: UUID):
         offer = _get_offer(request, offer_id)
+
+        if not has_object_permission('check_offer', user=request.user, obj=offer):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         images = offer.images.all()
         for image in images:

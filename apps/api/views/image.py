@@ -8,7 +8,7 @@ from apps.api.errors import ProblemDetailException
 from apps.core.models import Image
 from apps.api.views.base import SecuredView
 from apps.api.response import SingleResponse
-
+from object_checker.base_object_checker import has_object_permission
 
 
 class ImageDetail(SecuredView):
@@ -33,6 +33,9 @@ class ImageDetail(SecuredView):
     def delete(self, request, image_id: UUID):
 
         image = self._get_image(request, image_id)
+
+        if not has_object_permission('check_delete', user=request.user, obj=image):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         image.path.delete()
         image.hard_delete()

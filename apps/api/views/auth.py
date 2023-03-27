@@ -34,6 +34,8 @@ class UserAuth(SecuredView):
                 detail_type=ProblemDetailException.DetailType.INVALID_CREDENTIALS
             )
 
+        Token.objects.filter(expires_at__lte=timezone.now()).hard_delete()
+
         token = Token.objects.create(
             user_id=user.pk,
             expires_at=timezone.now() + settings.TOKEN_EXPIRATION

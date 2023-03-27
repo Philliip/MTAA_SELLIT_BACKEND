@@ -13,9 +13,15 @@ from apps.api.errors import ValidationException, ProblemDetailException
 from apps.api.forms.offer import OfferForm
 from apps.core.models import OfferChat, Offer, Image, OfferChatUser, Message
 from apps.api.response import SingleResponse, PaginationResponse
+from object_checker.base_object_checker import has_object_permission
+
 
 class ChatUser(SecuredView):
     def get(self, request, offer_chat_id: UUID):
+
+        if not has_object_permission('check_chat', user=request.user, obj=offer_chat_id):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
+
         offer_chat_users = OfferChatUser.objects.filter(offer_chat_id=offer_chat_id)
 
         return PaginationResponse(request, offer_chat_users, serializer=OfferChatUserSerializer.Base)
@@ -23,6 +29,9 @@ class ChatUser(SecuredView):
 class ChatMessage(SecuredView):
 
     def get(self, request, offer_chat_id: UUID):
+
+        if not has_object_permission('check_chat', user=request.user, obj=offer_chat_id):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         timestamp = request.GET.get('timestamp', None)
 
@@ -54,6 +63,9 @@ class ChatMessagesDetail(SecuredView):
     def delete(self, request, offer_chat_id: UUID, message_id: UUID):
 
         message = self._get_message(request, offer_chat_id, message_id)
+
+        if not has_object_permission('check_message', user=request.user, obj=message):
+            raise ProblemDetailException(request, _('Permission denied.'), status=HTTPStatus.FORBIDDEN)
 
         message.hard_delete()
 
