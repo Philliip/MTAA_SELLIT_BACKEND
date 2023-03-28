@@ -1,3 +1,4 @@
+import datetime
 from http import HTTPStatus
 from typing import Optional
 
@@ -16,25 +17,26 @@ User = get_user_model()
 
 
 class BearerBackend(ModelBackend):
-    @staticmethod
-    def _by_token(token) -> Optional[User]:
+    def authenticate(self, request, **kwargs) -> User:
         try:
-            token_obj = Token.objects.get(pk=token)
+            token = Token.objects.get(pk=kwargs['bearer'])
         except (Token.DoesNotExist, ValidationError):
-            return None
+            raise ProblemDetailException(
+                request,
+                _('Invalid Bearer Token'),
+                status=HTTPStatus.UNAUTHORIZED,
+            )
 
-        token_obj.user.last_login = timezone.now()
-        token_obj.user.save()
 
-        return token_obj.user
+        if not self.user_can_authenticate(token.user):
+            raise ProblemDetailException(request, _('Inactive user.'), status=HTTPStatus.FORBIDDEN)
 
-    def authenticate(self, request, **kwargs) -> Optional[User]:
-        if kwargs.get('bearer'):
-            user = self._by_token(kwargs.get('bearer'))
-        else:
-            user = super().authenticate(request, **kwargs)
+        token.user.last_login = timezone.now()
+        token.user.save()
 
-        return user
+        request.token = token
+
+        return token.user
 
 
 class BasicBackend(ModelBackend):

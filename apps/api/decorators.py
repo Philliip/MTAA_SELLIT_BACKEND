@@ -7,7 +7,7 @@ from apps.api.errors import ProblemDetailException
 
 def permission_required(perm):
     """
-    Mark a view function to check specific user permission.
+    Mark a view function to check specific users permission.
     """
     def decorator(func):
         def wrapper(request, *args, **kwargs):

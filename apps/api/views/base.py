@@ -76,7 +76,7 @@ class SecuredView(View):
         signature = request.headers.get('X-Signature', '')
 
         # Do not check signature for GitLab API keys, DEBUG API keys and DEBUG environment
-        if api_key.platform in [ApiKey.DevicePlatform.GILTAB, ApiKey.DevicePlatform.DEBUG] or settings.DEBUG:
+        if api_key.platform == ApiKey.DevicePlatform.DEBUG or settings.DEBUG:
             return None
 
         message = f"{request.body.decode('utf-8')}:{request.path}"

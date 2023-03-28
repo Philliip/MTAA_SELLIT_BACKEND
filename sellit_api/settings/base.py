@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import datetime
 
 import sentry_sdk
 from dotenv import load_dotenv
@@ -20,6 +21,9 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 ENV_FILE = os.path.join(BASE_DIR, '.env')
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 PRIVATE_DIR = os.path.join(BASE_DIR, 'private')
+
+DEFAULT_IMAGE = os.path.join(PRIVATE_DIR, 'images/users/default_image.jpg')
+OBJECT_CHECKERS_MODULE = 'apps.core.checkers'
 
 # .env
 if os.path.exists(ENV_FILE):
@@ -39,10 +43,14 @@ DEBUG = False
 
 ALLOWED_HOSTS = []
 
+TOKEN_EXPIRATION = datetime.timedelta(days=7)
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'channels',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -54,6 +62,8 @@ INSTALLED_APPS = [
 
     'apps.core',
     'apps.api',
+    'apps.chat',
+
 ]
 
 MIDDLEWARE = [
@@ -85,7 +95,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sellit_api.wsgi.application'
+ASGI_APPLICATION = 'sellit_api.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
 
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
