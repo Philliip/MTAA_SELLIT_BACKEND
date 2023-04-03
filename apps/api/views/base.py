@@ -28,10 +28,20 @@ class SecuredView(View):
             self._backends[schema.lower()] = load_backend(backend)
 
     def _authenticate(self, request) -> Union[AnonymousUser, AbstractBaseUser]:
-        auth_header = request.headers.get('Authorization', '')
-
-        if not auth_header:
+        if request.method in self.EXEMPT_AUTH:
             return AnonymousUser()
+
+        auth_header = request.headers.get('Authorization', '')
+        if not auth_header:
+            raise ProblemDetailException(
+                request,
+                title=_('Invalid or missing Authorization header.'),
+                status=HTTPStatus.UNAUTHORIZED,
+                detail_type=ProblemDetailException.DetailType.INVALID_TOKEN,
+                extra_headers=(
+                    ('WWW-Authenticate', f'Bearer realm="{settings.INSTANCE_NAME}'),
+                )
+            )
 
         auth_header = str(auth_header).split(' ')
 

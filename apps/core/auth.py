@@ -27,7 +27,6 @@ class BearerBackend(ModelBackend):
                 status=HTTPStatus.UNAUTHORIZED,
             )
 
-
         if not self.user_can_authenticate(token.user):
             raise ProblemDetailException(request, _('Inactive user.'), status=HTTPStatus.FORBIDDEN)
 
