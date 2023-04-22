@@ -4,6 +4,7 @@ import datetime
 
 from porcupine.base import Serializer
 from apps.api.serializers.image import ImageSerializer
+from apps.api.serializers.user import UserSerializer
 
 class OfferSerializer:
     class Base(Serializer):
@@ -15,6 +16,7 @@ class OfferSerializer:
         price: float
         images: List[ImageSerializer.Base]
         views: int
+        user: UserSerializer.Base
 
     class Detail(Base):
         description: str
