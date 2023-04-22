@@ -55,7 +55,6 @@ python-crontab==2.7.1
 python-dateutil==2.8.2
 python-dotenv==0.21.1
 pytz==2022.7.1
--e git+https://github.com/Philliip/MTAA_SELLIT.git@10234063cbd6da31f9720876b6e68c0ccee64253#egg=sellit_api
 sentry-sdk==1.17.0
 service-identity==21.1.0
 six==1.16.0
