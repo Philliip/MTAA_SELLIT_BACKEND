@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.api',
     'apps.chat',
+    'corsheaders',
 
 ]
 
@@ -209,3 +210,15 @@ if os.getenv('SENTRY_DSN', False):
 PAGINATION = {
     'DEFAULT_LIMIT': 10
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_ALL_HEADERS = True
+
+CORS_ALLOW_HEADERS = [
+    'token',
+    # Add other headers here if needed
+]
+
