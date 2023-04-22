@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import datetime
 
+
 import sentry_sdk
 from dotenv import load_dotenv
 from sentry_sdk.integrations.django import DjangoIntegration
@@ -117,6 +118,8 @@ DATABASES = {
         'PASSWORD': os.getenv('DATABASE_PASSWORD', None)
     }
 }
+
+
 
 
 # Password validation
