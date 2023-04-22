@@ -1,0 +1,82 @@
+[
+{
+  "model": "core.user",
+  "pk": "4fb44689-a10e-4a7d-a275-e5d76117b651",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$a2JmdEpKUnM0QjNDSUlwNm1wS0hEaQ$hPD8ZwSD481MzqMth5Sp55m+lkzepInzEi+LKazALKM",
+    "last_login": null,
+    "is_superuser": false,
+    "created_at": "2023-03-28T14:20:22.570Z",
+    "updated_at": "2023-03-28T14:20:22.570Z",
+    "deleted_at": null,
+    "username": "customer3",
+    "email": "custome32@gmail.com",
+    "name": "customer",
+    "surname": "customer",
+    "is_active": true,
+    "image": "/Users/phillip/Desktop/GitHub/MTAA_SELLIT/private/images/users/default_image.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": "56a52cef-9b45-43da-80a8-57bb3681986f",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$cDdjbWlhWU1LYnlIZFJyajk5RE5UNg$Pn7UdvQjAxbGU4iT4SxxBvcpXU2q39konnJaaTPQc0Q",
+    "last_login": "2023-04-17T14:46:18.453Z",
+    "is_superuser": false,
+    "created_at": "2023-03-20T18:52:56.498Z",
+    "updated_at": "2023-04-17T14:46:18.453Z",
+    "deleted_at": null,
+    "username": "customer",
+    "email": "customer@gmail.com",
+    "name": "customer",
+    "surname": "customer",
+    "is_active": true,
+    "image": "/Users/phillip/Desktop/GitHub/MTAA_SELLIT/private/images/users/default_image.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": "798310d7-58cb-4630-8302-3785b44cfe32",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$MFRzZ3Q3VHc1WVk0aFVKYTNjRHJCNg$fX+iV7jxVDD5Tcq2D0gIkHSU8+svO8FRmt8uDAnxszk",
+    "last_login": "2023-03-28T14:40:33.812Z",
+    "is_superuser": true,
+    "created_at": "2023-03-20T18:59:01.316Z",
+    "updated_at": "2023-03-28T14:40:33.812Z",
+    "deleted_at": null,
+    "username": "admin",
+    "email": "admin@sellit.com",
+    "name": "admin",
+    "surname": "admin",
+    "is_active": true,
+    "image": "/Users/phillip/Desktop/GitHub/MTAA_SELLIT/private/images/users/default_image.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": "e71ff45b-1ee8-471e-8251-607b391e064c",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$MUMxOFgwMTBkRE50emlVbU1uU3hjSQ$jHlazppcEXaCmd9wVB0GTZ0NlV1A/K9zzGAWdO1T3ZU",
+    "last_login": "2023-03-28T14:40:51.036Z",
+    "is_superuser": false,
+    "created_at": "2023-03-25T13:39:43.775Z",
+    "updated_at": "2023-03-28T14:40:51.036Z",
+    "deleted_at": null,
+    "username": "customer2",
+    "email": "customer2@gmail.com",
+    "name": "customer",
+    "surname": "customer",
+    "is_active": true,
+    "image": "/Users/phillip/Desktop/GitHub/MTAA_SELLIT/private/images/users/default_image.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
