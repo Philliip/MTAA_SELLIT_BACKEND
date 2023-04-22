@@ -1,0 +1,1048 @@
+[
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 1,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 1,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 1,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 1,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 2,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 2,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 2,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 2,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 3,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 3,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 3,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 3,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 4,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 4,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 4,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 4,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 5,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 5,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "core",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "core",
+    "model": "apikey"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "core",
+    "model": "category"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "core",
+    "model": "city"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "core",
+    "model": "token"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "core",
+    "model": "offer"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "core",
+    "model": "image"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "core",
+    "model": "offerchat"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "core",
+    "model": "message"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "core",
+    "model": "offerchatusers"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "core",
+    "model": "location"
+  }
+},
+{
+  "model": "core.user",
+  "pk": "4fb44689-a10e-4a7d-a275-e5d76117b651",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$a2JmdEpKUnM0QjNDSUlwNm1wS0hEaQ$hPD8ZwSD481MzqMth5Sp55m+lkzepInzEi+LKazALKM",
+    "last_login": null,
+    "is_superuser": false,
+    "created_at": "2023-03-28T14:20:22.570Z",
+    "updated_at": "2023-03-28T14:20:22.570Z",
+    "deleted_at": null,
+    "username": "customer3",
+    "email": "custome32@gmail.com",
+    "name": "customer",
+    "surname": "customer",
+    "is_active": true,
+    "image": "/Users/phillip/Desktop/GitHub/MTAA_SELLIT/private/images/users/default_image.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": "56a52cef-9b45-43da-80a8-57bb3681986f",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$cDdjbWlhWU1LYnlIZFJyajk5RE5UNg$Pn7UdvQjAxbGU4iT4SxxBvcpXU2q39konnJaaTPQc0Q",
+    "last_login": "2023-04-17T14:46:18.453Z",
+    "is_superuser": false,
+    "created_at": "2023-03-20T18:52:56.498Z",
+    "updated_at": "2023-04-17T14:46:18.453Z",
+    "deleted_at": null,
+    "username": "customer",
+    "email": "customer@gmail.com",
+    "name": "customer",
+    "surname": "customer",
+    "is_active": true,
+    "image": "/Users/phillip/Desktop/GitHub/MTAA_SELLIT/private/images/users/default_image.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": "798310d7-58cb-4630-8302-3785b44cfe32",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$MFRzZ3Q3VHc1WVk0aFVKYTNjRHJCNg$fX+iV7jxVDD5Tcq2D0gIkHSU8+svO8FRmt8uDAnxszk",
+    "last_login": "2023-03-28T14:40:33.812Z",
+    "is_superuser": true,
+    "created_at": "2023-03-20T18:59:01.316Z",
+    "updated_at": "2023-03-28T14:40:33.812Z",
+    "deleted_at": null,
+    "username": "admin",
+    "email": "admin@sellit.com",
+    "name": "admin",
+    "surname": "admin",
+    "is_active": true,
+    "image": "/Users/phillip/Desktop/GitHub/MTAA_SELLIT/private/images/users/default_image.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.user",
+  "pk": "e71ff45b-1ee8-471e-8251-607b391e064c",
+  "fields": {
+    "password": "argon2$argon2id$v=19$m=102400,t=2,p=8$MUMxOFgwMTBkRE50emlVbU1uU3hjSQ$jHlazppcEXaCmd9wVB0GTZ0NlV1A/K9zzGAWdO1T3ZU",
+    "last_login": "2023-03-28T14:40:51.036Z",
+    "is_superuser": false,
+    "created_at": "2023-03-25T13:39:43.775Z",
+    "updated_at": "2023-03-28T14:40:51.036Z",
+    "deleted_at": null,
+    "username": "customer2",
+    "email": "customer2@gmail.com",
+    "name": "customer",
+    "surname": "customer",
+    "is_active": true,
+    "image": "/Users/phillip/Desktop/GitHub/MTAA_SELLIT/private/images/users/default_image.jpg",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "core.apikey",
+  "pk": "4819baa4-2ef7-4682-a3da-4bd2b5e14fc6",
+  "fields": {
+    "created_at": "2023-03-20T20:20:47.669Z",
+    "updated_at": "2023-03-20T20:22:34.856Z",
+    "deleted_at": null,
+    "name": "test_update",
+    "platform": "debug",
+    "secret": "test",
+    "is_active": false
+  }
+},
+{
+  "model": "core.apikey",
+  "pk": "695818fb-4c50-4daa-a4ba-a74c4d9d6b77",
+  "fields": {
+    "created_at": "2023-03-20T18:07:49.548Z",
+    "updated_at": "2023-03-20T18:07:49.548Z",
+    "deleted_at": null,
+    "name": "test",
+    "platform": "debug",
+    "secret": "test",
+    "is_active": true
+  }
+},
+{
+  "model": "core.token",
+  "pk": "0021da0c-8ce6-43dd-b3e7-f6607f6fc4ca",
+  "fields": {
+    "created_at": "2023-03-28T14:40:36.190Z",
+    "updated_at": "2023-03-28T14:40:36.190Z",
+    "deleted_at": null,
+    "user": "e71ff45b-1ee8-471e-8251-607b391e064c",
+    "expires_at": "2023-04-04T14:40:36.190Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "31ae2a09-2ec8-4a10-adb8-8a4fc382f41a",
+  "fields": {
+    "created_at": "2023-03-21T15:24:26.590Z",
+    "updated_at": "2023-03-21T15:24:26.590Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "expires_at": "2023-04-24T15:24:26.589Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "3ab0fdc4-5bf4-4098-973b-95f0a6b5e998",
+  "fields": {
+    "created_at": "2023-03-28T15:02:29.791Z",
+    "updated_at": "2023-03-28T15:02:29.791Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "expires_at": "2023-04-04T15:02:29.791Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "3bf7a2c6-00ae-4790-acac-7499eea343f1",
+  "fields": {
+    "created_at": "2023-03-25T09:42:33.090Z",
+    "updated_at": "2023-03-25T09:42:33.090Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "expires_at": "2023-04-24T09:42:33.090Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "4a295d1c-0d97-41c9-ae2d-53ce0a33c5ac",
+  "fields": {
+    "created_at": "2023-03-28T15:21:18.401Z",
+    "updated_at": "2023-03-28T15:21:18.401Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "expires_at": "2023-04-04T15:21:18.400Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "63438773-6da6-4e05-8918-e03528f97450",
+  "fields": {
+    "created_at": "2023-03-20T20:01:33.126Z",
+    "updated_at": "2023-03-20T20:01:33.126Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "expires_at": "2023-04-24T20:01:33.126Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "77f0ef28-29f6-48a3-bfdb-9d219acd9806",
+  "fields": {
+    "created_at": "2023-03-28T15:21:40.254Z",
+    "updated_at": "2023-03-28T15:21:40.254Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "expires_at": "2023-04-04T15:21:40.254Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "7812d380-7e22-4f6e-ba06-c1ff47376de5",
+  "fields": {
+    "created_at": "2023-03-25T13:39:51.411Z",
+    "updated_at": "2023-03-25T13:39:51.411Z",
+    "deleted_at": null,
+    "user": "e71ff45b-1ee8-471e-8251-607b391e064c",
+    "expires_at": "2023-04-24T13:39:51.411Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "80ac322e-974a-47e8-90a7-ca04f10d921a",
+  "fields": {
+    "created_at": "2023-03-27T12:53:37.074Z",
+    "updated_at": "2023-03-27T12:53:37.074Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "expires_at": "2023-04-03T12:53:37.074Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "907182c6-c88b-4752-b864-cac5b4ddb751",
+  "fields": {
+    "created_at": "2023-03-20T19:11:05.033Z",
+    "updated_at": "2023-03-20T19:11:05.033Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "expires_at": "2023-04-24T19:11:05.033Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "9755c877-b840-48d3-9c7c-4710e9bedd7f",
+  "fields": {
+    "created_at": "2023-03-27T12:55:09.438Z",
+    "updated_at": "2023-03-27T12:55:09.438Z",
+    "deleted_at": null,
+    "user": "e71ff45b-1ee8-471e-8251-607b391e064c",
+    "expires_at": "2023-04-03T12:55:09.437Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "a9516f68-4293-45d2-9fdf-19fcecbfb427",
+  "fields": {
+    "created_at": "2023-03-20T20:06:41.579Z",
+    "updated_at": "2023-03-20T20:06:41.579Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "expires_at": "2023-04-24T20:06:41.579Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "c375af1d-5b7f-4723-ad2f-c17606874ae3",
+  "fields": {
+    "created_at": "2023-03-28T15:21:11.396Z",
+    "updated_at": "2023-03-28T15:21:11.396Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "expires_at": "2023-04-04T15:21:11.396Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "d12c80f5-6655-4a9f-ad0e-da22251cbf1c",
+  "fields": {
+    "created_at": "2023-03-20T19:51:23.516Z",
+    "updated_at": "2023-03-20T19:51:23.516Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "expires_at": "2023-04-24T19:51:23.515Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "df155663-d328-41a3-aca1-5b9b3c69c1f5",
+  "fields": {
+    "created_at": "2023-03-28T14:40:33.846Z",
+    "updated_at": "2023-03-28T14:40:33.846Z",
+    "deleted_at": null,
+    "user": "e71ff45b-1ee8-471e-8251-607b391e064c",
+    "expires_at": "2023-04-04T14:40:33.845Z"
+  }
+},
+{
+  "model": "core.token",
+  "pk": "e73deaa0-e745-47b7-a88f-1e3df031fe8f",
+  "fields": {
+    "created_at": "2023-03-20T20:18:35.730Z",
+    "updated_at": "2023-03-20T20:18:35.730Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "expires_at": "2023-04-24T20:18:35.729Z"
+  }
+},
+{
+  "model": "core.city",
+  "pk": "d309aa9d-25dc-4ce6-b90d-e522017debed",
+  "fields": {
+    "created_at": "2023-03-20T20:38:18.749Z",
+    "updated_at": "2023-03-20T20:39:44.366Z",
+    "deleted_at": null,
+    "name": "Svidnik",
+    "zip": "666"
+  }
+},
+{
+  "model": "core.image",
+  "pk": "2f8cd5e2-7648-462c-b5e9-bdf29d85e404",
+  "fields": {
+    "created_at": "2023-03-20T23:14:43.288Z",
+    "updated_at": "2023-03-20T23:14:43.290Z",
+    "deleted_at": null,
+    "path": "images/offers/8d999ae2-3263-43e1-967d-b933efd80564/bae07f29-1529-49b2-8f5c-bc96fab39834.jpg",
+    "mime_type": "image/jpeg",
+    "offer": "8d999ae2-3263-43e1-967d-b933efd80564"
+  }
+},
+{
+  "model": "core.image",
+  "pk": "51310aa0-4008-463e-b352-b65730b6fc03",
+  "fields": {
+    "created_at": "2023-03-20T23:00:16.051Z",
+    "updated_at": "2023-03-20T23:00:16.053Z",
+    "deleted_at": null,
+    "path": "images/offers/b6dc1485-34a4-458f-ac38-acb3037eb027/5930139b-a455-4281-a5b8-81b250e2bea0.jpg",
+    "mime_type": "image/jpeg",
+    "offer": "b6dc1485-34a4-458f-ac38-acb3037eb027"
+  }
+},
+{
+  "model": "core.image",
+  "pk": "98e80c21-634a-44c6-a14f-a87c2d1fde50",
+  "fields": {
+    "created_at": "2023-03-20T23:00:16.054Z",
+    "updated_at": "2023-03-20T23:00:16.055Z",
+    "deleted_at": null,
+    "path": "images/offers/b6dc1485-34a4-458f-ac38-acb3037eb027/7172ed6b-e3dc-44fe-a5da-2e6d014857d8.jpg",
+    "mime_type": "image/jpeg",
+    "offer": "b6dc1485-34a4-458f-ac38-acb3037eb027"
+  }
+},
+{
+  "model": "core.image",
+  "pk": "a66c7826-eb56-42d4-b74f-45e398352bec",
+  "fields": {
+    "created_at": "2023-03-20T23:14:43.291Z",
+    "updated_at": "2023-03-20T23:14:43.292Z",
+    "deleted_at": null,
+    "path": "images/offers/8d999ae2-3263-43e1-967d-b933efd80564/bb351e90-55ec-4099-88ff-d16d6cd5895d.jpg",
+    "mime_type": "image/jpeg",
+    "offer": "8d999ae2-3263-43e1-967d-b933efd80564"
+  }
+},
+{
+  "model": "core.image",
+  "pk": "ac7fa476-02d8-411b-8e29-1eff0d4e9bc9",
+  "fields": {
+    "created_at": "2023-03-20T22:54:03.030Z",
+    "updated_at": "2023-03-20T22:54:03.034Z",
+    "deleted_at": null,
+    "path": "images/offers/8722e62b-174a-49ca-89fb-efceedca6492/4d2cd0ad-c2d2-4876-a679-0495312d800c.jpg",
+    "mime_type": "image/jpeg",
+    "offer": "8722e62b-174a-49ca-89fb-efceedca6492"
+  }
+},
+{
+  "model": "core.image",
+  "pk": "f4198f73-bcca-4abd-8011-62163c0e3f8c",
+  "fields": {
+    "created_at": "2023-03-20T22:54:03.036Z",
+    "updated_at": "2023-03-20T22:54:03.037Z",
+    "deleted_at": null,
+    "path": "images/offers/8722e62b-174a-49ca-89fb-efceedca6492/3fcfb17b-35f1-4f9f-ba7b-5352e855c128.jpg",
+    "mime_type": "image/jpeg",
+    "offer": "8722e62b-174a-49ca-89fb-efceedca6492"
+  }
+},
+{
+  "model": "core.category",
+  "pk": "519b2b08-e943-4a49-aa18-27362967eed2",
+  "fields": {
+    "created_at": "2023-03-20T20:34:43.058Z",
+    "updated_at": "2023-03-20T20:36:08.058Z",
+    "deleted_at": null,
+    "name": "pecivo"
+  }
+},
+{
+  "model": "core.category",
+  "pk": "984370d4-0eae-45fa-a4b7-354b54f14a98",
+  "fields": {
+    "created_at": "2023-03-20T20:36:11.027Z",
+    "updated_at": "2023-03-20T20:36:11.027Z",
+    "deleted_at": null,
+    "name": "Bicykle"
+  }
+},
+{
+  "model": "core.offer",
+  "pk": "8722e62b-174a-49ca-89fb-efceedca6492",
+  "fields": {
+    "created_at": "2023-03-20T22:54:03.027Z",
+    "updated_at": "2023-03-20T22:54:03.027Z",
+    "deleted_at": null,
+    "title": "Skurli",
+    "description": "Trosku pokazeny",
+    "price": "0.99",
+    "category": "519b2b08-e943-4a49-aa18-27362967eed2",
+    "city": "d309aa9d-25dc-4ce6-b90d-e522017debed",
+    "views": 0,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32"
+  }
+},
+{
+  "model": "core.offer",
+  "pk": "8d999ae2-3263-43e1-967d-b933efd80564",
+  "fields": {
+    "created_at": "2023-03-20T23:14:43.286Z",
+    "updated_at": "2023-03-20T23:14:43.286Z",
+    "deleted_at": null,
+    "title": "Skurli",
+    "description": "Trosku pokazeny",
+    "price": "0.99",
+    "category": "519b2b08-e943-4a49-aa18-27362967eed2",
+    "city": "d309aa9d-25dc-4ce6-b90d-e522017debed",
+    "views": 0,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32"
+  }
+},
+{
+  "model": "core.offer",
+  "pk": "95974138-3817-4520-b790-a498001a414e",
+  "fields": {
+    "created_at": "2023-03-20T22:51:36.389Z",
+    "updated_at": "2023-03-24T08:25:16.472Z",
+    "deleted_at": null,
+    "title": "pec",
+    "description": "kamenna pec",
+    "price": "0.99",
+    "category": "519b2b08-e943-4a49-aa18-27362967eed2",
+    "city": "d309aa9d-25dc-4ce6-b90d-e522017debed",
+    "views": 3,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32"
+  }
+},
+{
+  "model": "core.offer",
+  "pk": "b6dc1485-34a4-458f-ac38-acb3037eb027",
+  "fields": {
+    "created_at": "2023-03-20T23:00:16.046Z",
+    "updated_at": "2023-03-20T23:00:16.046Z",
+    "deleted_at": null,
+    "title": "Skurli",
+    "description": "Trosku pokazeny",
+    "price": "0.99",
+    "category": "519b2b08-e943-4a49-aa18-27362967eed2",
+    "city": "d309aa9d-25dc-4ce6-b90d-e522017debed",
+    "views": 0,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32"
+  }
+},
+{
+  "model": "core.offerchat",
+  "pk": "7116819a-a025-41cb-9b2f-e908e313dd99",
+  "fields": {
+    "created_at": "2023-03-25T13:39:04.403Z",
+    "updated_at": "2023-03-25T14:25:05.790Z",
+    "deleted_at": null,
+    "offer": "8d999ae2-3263-43e1-967d-b933efd80564"
+  }
+},
+{
+  "model": "core.offerchat",
+  "pk": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+  "fields": {
+    "created_at": "2023-03-25T09:42:39.153Z",
+    "updated_at": "2023-03-28T14:26:01.732Z",
+    "deleted_at": null,
+    "offer": "95974138-3817-4520-b790-a498001a414e"
+  }
+},
+{
+  "model": "core.offerchatuser",
+  "pk": "0335f4d1-a066-4b19-a3d0-37b20237caa6",
+  "fields": {
+    "created_at": "2023-03-25T13:39:04.405Z",
+    "updated_at": "2023-03-25T13:39:04.405Z",
+    "deleted_at": null,
+    "offer_chat": "7116819a-a025-41cb-9b2f-e908e313dd99",
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "owner": false
+  }
+},
+{
+  "model": "core.offerchatuser",
+  "pk": "61c352dc-6bf2-41fb-93f2-e964f2b5956f",
+  "fields": {
+    "created_at": "2023-03-25T09:42:39.156Z",
+    "updated_at": "2023-03-25T09:42:39.156Z",
+    "deleted_at": null,
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "owner": true
+  }
+},
+{
+  "model": "core.offerchatuser",
+  "pk": "9983e74c-ec10-44f4-81eb-cc6e7157c410",
+  "fields": {
+    "created_at": "2023-03-25T13:39:04.404Z",
+    "updated_at": "2023-03-25T13:39:04.404Z",
+    "deleted_at": null,
+    "offer_chat": "7116819a-a025-41cb-9b2f-e908e313dd99",
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "owner": true
+  }
+},
+{
+  "model": "core.offerchatuser",
+  "pk": "b1417d53-810d-4ef3-9541-9873b6fca1b0",
+  "fields": {
+    "created_at": "2023-03-25T09:42:39.157Z",
+    "updated_at": "2023-03-25T09:42:39.157Z",
+    "deleted_at": null,
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "owner": false
+  }
+},
+{
+  "model": "core.message",
+  "pk": "08335edb-2f56-4afc-abac-01c2fd6d6b65",
+  "fields": {
+    "created_at": "2023-03-25T13:31:13.337Z",
+    "updated_at": "2023-03-25T13:31:13.337Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "0b25f68e-090e-4466-91cf-97f28a254b31",
+  "fields": {
+    "created_at": "2023-03-25T13:37:08.296Z",
+    "updated_at": "2023-03-25T13:37:08.296Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "1d2864f5-ac91-40fb-967d-7b31149bf7eb",
+  "fields": {
+    "created_at": "2023-03-25T13:37:23.680Z",
+    "updated_at": "2023-03-25T13:37:23.680Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "1dd89468-9b4e-4539-ba76-cc77bd8392c3",
+  "fields": {
+    "created_at": "2023-03-25T14:15:41.618Z",
+    "updated_at": "2023-03-25T14:15:41.618Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "2918cb30-9d00-4aa6-95b2-b887b16d8b01",
+  "fields": {
+    "created_at": "2023-03-25T14:15:43.717Z",
+    "updated_at": "2023-03-25T14:15:43.717Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "37dcdb95-559c-49dc-b4da-594d4d46968d",
+  "fields": {
+    "created_at": "2023-03-28T14:26:01.727Z",
+    "updated_at": "2023-03-28T14:26:01.727Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "45d8cb5b-a5c0-4fd3-be22-1960a97e70e2",
+  "fields": {
+    "created_at": "2023-03-25T13:50:22.964Z",
+    "updated_at": "2023-03-25T13:50:22.964Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "7116819a-a025-41cb-9b2f-e908e313dd99",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "569d6c8d-aa09-40cc-880b-1c7d36b38792",
+  "fields": {
+    "created_at": "2023-03-25T13:29:16.286Z",
+    "updated_at": "2023-03-25T13:29:16.286Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "63a75c82-6ccf-45d9-85c4-b27deb9b43e0",
+  "fields": {
+    "created_at": "2023-03-25T14:18:11.893Z",
+    "updated_at": "2023-03-25T14:18:11.893Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "7116819a-a025-41cb-9b2f-e908e313dd99",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "66966737-e72f-4f4b-b6e7-ccc685ad7aed",
+  "fields": {
+    "created_at": "2023-03-25T14:25:04.857Z",
+    "updated_at": "2023-03-25T14:25:04.857Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "7116819a-a025-41cb-9b2f-e908e313dd99",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "70093da8-cdd9-42ba-bb64-c5196dd19be6",
+  "fields": {
+    "created_at": "2023-03-25T14:15:43.052Z",
+    "updated_at": "2023-03-25T14:15:43.052Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "71d2c36a-b471-48fb-8b01-4fc35f9cedcf",
+  "fields": {
+    "created_at": "2023-03-27T19:06:18.427Z",
+    "updated_at": "2023-03-27T19:06:18.427Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "a1ce132f-9d4f-4caa-8d0b-513a8de19454",
+  "fields": {
+    "created_at": "2023-03-25T14:25:05.781Z",
+    "updated_at": "2023-03-25T14:25:05.782Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "7116819a-a025-41cb-9b2f-e908e313dd99",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "a3004cab-496f-4908-8b65-e40c06056f60",
+  "fields": {
+    "created_at": "2023-03-27T19:07:26.286Z",
+    "updated_at": "2023-03-27T19:07:26.286Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "a9eab069-f291-4a86-b28f-c64cbf7bbcbe",
+  "fields": {
+    "created_at": "2023-03-25T13:35:47.897Z",
+    "updated_at": "2023-03-25T13:35:47.897Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "be4f0d8b-96f6-4875-9f3d-16c5973f70c9",
+  "fields": {
+    "created_at": "2023-03-25T13:37:05.865Z",
+    "updated_at": "2023-03-25T13:37:05.865Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "d96fb2de-7f2b-4974-b10f-65789a7cef8f",
+  "fields": {
+    "created_at": "2023-03-27T19:07:37.056Z",
+    "updated_at": "2023-03-27T19:07:37.056Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "e6b4a379-e0aa-4bd5-bc27-cf20936d04ea",
+  "fields": {
+    "created_at": "2023-03-25T13:25:30.495Z",
+    "updated_at": "2023-03-25T13:25:30.495Z",
+    "deleted_at": null,
+    "user": "56a52cef-9b45-43da-80a8-57bb3681986f",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+},
+{
+  "model": "core.message",
+  "pk": "ebfbf82b-b177-4261-96df-3c4a1bda7cd3",
+  "fields": {
+    "created_at": "2023-03-25T13:25:40.499Z",
+    "updated_at": "2023-03-25T13:25:40.499Z",
+    "deleted_at": null,
+    "user": "798310d7-58cb-4630-8302-3785b44cfe32",
+    "offer_chat": "95d5e919-4278-4f0b-96b5-062f85bb7684",
+    "content": "hi",
+    "location": null
+  }
+}
+]
