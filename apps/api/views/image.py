@@ -12,6 +12,8 @@ from object_checker.base_object_checker import has_object_permission
 
 
 class ImageDetail(SecuredView):
+    EXEMPT_AUTH = ['GET']
+    EXEMPT_API_KEY = ['GET']
 
     @staticmethod
     def _get_image(request, image_id: UUID) -> Image:
