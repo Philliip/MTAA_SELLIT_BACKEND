@@ -114,7 +114,7 @@ class UserProfileImage(SecuredView):
 
         user = _get_user(request, user_id)
 
-        return FileResponse(user.image, as_attachment=True, filename=user.image.name)
+        return FileResponse(user.image, filename=user.image.name)
 
     @transaction.atomic
     def put(self, request, user_id: UUID):
