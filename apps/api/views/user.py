@@ -107,6 +107,9 @@ class UserMe(SecuredView):
 
 class UserProfileImage(SecuredView):
 
+    EXEMPT_AUTH = ['GET']
+    EXEMPT_API_KEY = ['GET']
+
     def get(self, request, user_id: UUID):
 
         user = _get_user(request, user_id)

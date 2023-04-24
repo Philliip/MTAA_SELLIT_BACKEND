@@ -23,7 +23,7 @@ class Image(BaseModel):
             full_upload_dir = os.path.join(settings.PRIVATE_DIR, upload_dir)
             os.makedirs(full_upload_dir, exist_ok=True)
 
-        return os.path.join(upload_dir, filename)
+        return f"images/offers/{self.offer_id}/{filename}"
 
     path = models.FileField(
         null=False,
