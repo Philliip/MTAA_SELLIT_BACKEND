@@ -29,7 +29,7 @@ class ImageDetail(SecuredView):
 
         image = self._get_image(request, image_id)
 
-        return FileResponse(image.path, as_attachment=True)
+        return FileResponse(image.path)
 
     @transaction.atomic
     def delete(self, request, image_id: UUID):
