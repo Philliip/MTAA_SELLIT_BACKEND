@@ -4,7 +4,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
 
-from apps.core.models import Token, Message, OfferChatUser, OfferChat
+from apps.core.models import Token, Message, OfferChatUser, OfferChat, Location
 
 
 class OfferChatConsumer(AsyncWebsocketConsumer):
@@ -31,11 +31,18 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
+        location = text_data_json['location']
         message = text_data_json['message']
         user_id = text_data_json['user_id']
         username = text_data_json['username']
 
-        message_obj = await self.save_message(user_id, self.offer_chat_id, message)
+        if location:
+            longitude = message.split(':')[0]
+            latitude = message.split(':')[1]
+            location = Location.objects.create(longitude=longitude, latitude=latitude)
+            message_obj = await self.save_message(user_id, self.offer_chat_id, location=location)
+        else:
+            message_obj = await self.save_message(user_id, self.offer_chat_id, message=message)
 
         # Send message to activity group
         await self.channel_layer.group_send(
@@ -46,8 +53,9 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         )
 
     @database_sync_to_async
-    def save_message(self, user_id, offer_chat_id, content):
-        message = Message.objects.create(user_id=user_id, offer_chat_id=offer_chat_id, content=content)
+    def save_message(self, user_id, offer_chat_id, content=None, location=None):
+        message = Message.objects.create(user_id=user_id, offer_chat_id=offer_chat_id, content=content,
+                                         location=location)
         OfferChat.objects.filter(id=offer_chat_id).update(updated_at=timezone.now())
         return message
 

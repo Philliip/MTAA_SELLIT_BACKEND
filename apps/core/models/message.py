@@ -11,5 +11,5 @@ class Message(BaseModel):
 
     user = models.ForeignKey('User', null=False, related_name='messages', on_delete=models.CASCADE)
     offer_chat = models.ForeignKey('OfferChat', null=False, related_name='messages', on_delete=models.CASCADE)
-    content = models.CharField(max_length=200, null=False, verbose_name=_('message_content'))
+    content = models.CharField(max_length=200, null=True, verbose_name=_('message_content'))
     location = models.ForeignKey('Location', null=True, related_name='messages', on_delete=models.CASCADE)
