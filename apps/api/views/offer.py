@@ -124,7 +124,6 @@ class OfferChatManagement(SecuredView):
         try:
             offer_chat = OfferChat.objects.get(offer_id=offer_id, chat_users__user=request.user)
         except OfferChat.DoesNotExist:
-
             offer_chat = OfferChat.objects.create(offer_id=offer_id)
             OfferChatUser.objects.create(offer_chat=offer_chat, user=offer.user, owner=True)
             OfferChatUser.objects.create(offer_chat=offer_chat, user=request.user)
