@@ -42,7 +42,7 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
             location = Location.objects.create(longitude=longitude, latitude=latitude)
             message_obj = await self.save_message(user_id, self.offer_chat_id, location=location)
         else:
-            message_obj = await self.save_message(user_id, self.offer_chat_id, message=message)
+            message_obj = await self.save_message(user_id, self.offer_chat_id, content=message)
 
         # Send message to activity group
         await self.channel_layer.group_send(
