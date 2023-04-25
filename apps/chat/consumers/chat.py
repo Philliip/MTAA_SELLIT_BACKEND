@@ -36,13 +36,7 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         user_id = text_data_json['user_id']
         username = text_data_json['username']
 
-        if location:
-            longitude = message.split(':')[0]
-            latitude = message.split(':')[1]
-            location = Location.objects.create(longitude=longitude, latitude=latitude)
-            message_obj = await self.save_message(user_id, self.offer_chat_id, location=location)
-        else:
-            message_obj = await self.save_message(user_id, self.offer_chat_id, content=message)
+        message_obj = await self.save_message(user_id, self.offer_chat_id, content=message, location=location)
 
         # Send message to activity group
         await self.channel_layer.group_send(
@@ -50,13 +44,19 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
                                  'message': message,
                                  "username": username,
                                  "created_at": message_obj.created_at.strftime("%Y-%m-%d %H:%M:%S"),
-                                 "location": message_obj.location}
+                                 "location": location}
         )
 
     @database_sync_to_async
     def save_message(self, user_id, offer_chat_id, content=None, location=None):
+        location_obj = None
+        if location:
+            longitude = content.split(':')[0]
+            latitude = content.split(':')[1]
+            location_obj = Location.objects.create(longitude=longitude, latitude=latitude)
+
         message = Message.objects.create(user_id=user_id, offer_chat_id=offer_chat_id, content=content,
-                                         location=location)
+                                         location=location_obj)
         OfferChat.objects.filter(id=offer_chat_id).update(updated_at=timezone.now())
         return message
 
@@ -66,7 +66,6 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         username = event['username']
         created_at = event['created_at']
         location = event['location']
-
         # Send message to WebSocket
         await self.send(text_data=json.dumps({"username": username, "message": message, "created_at": created_at, "location": location}))
 
