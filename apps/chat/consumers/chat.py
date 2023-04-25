@@ -49,8 +49,8 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
             self.offer_chat_id, {'type': 'chat_message',
                                  'message': message,
                                  "username": username,
-                                 "created_at": message_obj.created_at.strftime("%Y-%m-%d %H:%M:%S",
-                                 "location": message_obj.location)}
+                                 "created_at": message_obj.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                                 "location": message_obj.location}
         )
 
     @database_sync_to_async
