@@ -49,7 +49,8 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
             self.offer_chat_id, {'type': 'chat_message',
                                  'message': message,
                                  "username": username,
-                                 "created_at": message_obj.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+                                 "created_at": message_obj.created_at.strftime("%Y-%m-%d %H:%M:%S",
+                                 "location": message_obj.location)}
         )
 
     @database_sync_to_async
@@ -64,8 +65,9 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         message = event['message']
         username = event['username']
         created_at = event['created_at']
+        location = event['location']
 
         # Send message to WebSocket
-        await self.send(text_data=json.dumps({"username": username, "message": message, "created_at": created_at}))
+        await self.send(text_data=json.dumps({"username": username, "message": message, "created_at": created_at, "location": location}))
 
 
