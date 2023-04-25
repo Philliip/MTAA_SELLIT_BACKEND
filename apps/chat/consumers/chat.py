@@ -41,6 +41,7 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         # Send message to activity group
         await self.channel_layer.group_send(
             self.offer_chat_id, {'type': 'chat_message',
+                                 "user_id": user_id,
                                  'message': message,
                                  "username": username,
                                  "created_at": message_obj.created_at.strftime("%Y-%m-%d %H:%M:%S"),
@@ -66,7 +67,9 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         username = event['username']
         created_at = event['created_at']
         location = event['location']
+        user_id = event['user_id']
         # Send message to WebSocket
-        await self.send(text_data=json.dumps({"username": username, "message": message, "created_at": created_at, "location": location}))
+        await self.send(text_data=json.dumps({"username": username, "message": message, "created_at": created_at,
+                                              "location": location, "user_id": user_id}))
 
 
