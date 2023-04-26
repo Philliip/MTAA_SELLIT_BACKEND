@@ -18,6 +18,7 @@ from object_checker.base_object_checker import has_object_permission
 
 
 class OfferManagement(SecuredView):
+    EXEMPT_AUTH = ['GET']
 
     @transaction.atomic
     def post(self, request):
@@ -59,6 +60,7 @@ def _get_offer(request, offer_id: UUID) -> Offer:
         raise ProblemDetailException(request, _("Offer not found"), status=HTTPStatus.NOT_FOUND, previous=e)
     return offer
 class OfferDetail(SecuredView):
+    EXEMPT_AUTH = ['GET']
 
     @transaction.atomic
     def get(self, request, offer_id: UUID):
