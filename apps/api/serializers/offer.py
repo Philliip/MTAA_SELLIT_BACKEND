@@ -26,5 +26,6 @@ class OfferSerializer:
         id: UUID
         title: str
         price: float
+        user: UserSerializer.Base
 
 
