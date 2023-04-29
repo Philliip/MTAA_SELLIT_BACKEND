@@ -3,8 +3,28 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
+import requests
 
 from apps.core.models import Token, Message, OfferChatUser, OfferChat, Location
+
+def send_push_notification(token, title, body):
+    url = 'https://exp.host/--/api/v2/push/send'
+    headers = {
+        'Content-Type': 'application/json',
+    }
+    data = {
+        'to': token,
+        'title': title,
+        'body': body,
+    }
+
+    response = requests.post(url, headers=headers, json=data)
+
+    if response.status_code == 200:
+        return True
+    else:
+        print(f"Failed to send push notification: {response.text}")
+        return False
 
 
 class OfferChatConsumer(AsyncWebsocketConsumer):
@@ -37,6 +57,12 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         username = text_data_json['username']
 
         message_obj = await self.save_message(user_id, self.offer_chat_id, content=message, location=location)
+
+        # Send push notification
+        token = "ExponentPushToken[PcNhsMFgxq_Y6cDwa9rlKD]"
+        title = f"New message from {username}"
+        body = message
+        send_push_notification(token, title, body)  # Add this line
 
         # Send message to activity group
         await self.channel_layer.group_send(
