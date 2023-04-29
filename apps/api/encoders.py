@@ -1,3 +1,6 @@
+"""
+Code source: https://github.com/backbonesk/django-project-template
+"""
 import decimal
 from enum import Enum
 from uuid import UUID
