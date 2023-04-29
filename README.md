@@ -1,6 +1,7 @@
 # sellit_api
 
 MTTA school project
+### Credits to @backbonesk and their project django-project-template which was used as a tempplate for our project
 
 
 ## Database basic setup
