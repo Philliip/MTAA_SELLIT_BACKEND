@@ -2,33 +2,10 @@ import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
-from asgiref.sync import sync_to_async
-
-
 from django.utils import timezone
-import requests_async as requests
 
-from apps.core.models import Token, Message, OfferChatUser, OfferChat, Location, ExpoToken
 
-async def send_push_notification(token, title, body):
-    url = 'https://exp.host/--/api/v2/push/send'
-    headers = {
-        'Content-Type': 'application/json',
-    }
-    data = {
-        'to': token,
-        'title': title,
-        'body': body,
-    }
-
-    response = await requests.post(url, headers=headers, json=data)
-
-    if response.status_code == 200:
-        return True
-    else:
-        print(f"Failed to send push notification: {response.text}")
-        return False
-
+from apps.core.models import Message, OfferChatUser, OfferChat, Location
 
 
 class OfferChatConsumer(AsyncWebsocketConsumer):
@@ -62,16 +39,6 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
 
         message_obj = await self.save_message(user_id, self.offer_chat_id, content=message, location=location)
 
-        title = f"New message from {username}"
-        body = message
-
-        expo_tokens = await self.get_expo_tokens(user_id)
-        for expo_token in expo_tokens:
-            print(f"Sending push notification for token: {expo_token.token}")
-            result = await send_push_notification(expo_token.token, title, body)
-            if not result:
-                print(f"Failed to send push notification for token: {expo_token.token}")
-
         # Send message to activity group
         await self.channel_layer.group_send(
             self.offer_chat_id, {'type': 'chat_message',
@@ -94,11 +61,6 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
                                          location=location_obj)
         OfferChat.objects.filter(id=offer_chat_id).update(updated_at=timezone.now())
         return message
-
-    @sync_to_async
-    def get_expo_tokens(self, user_id):
-        expo_tokens = list(ExpoToken.objects.filter(user_id=user_id))
-        return expo_tokens
 
     # Receive message from activity group
     async def chat_message(self, event):
