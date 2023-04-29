@@ -2,12 +2,15 @@ import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
+from asgiref.sync import sync_to_async
+
+
 from django.utils import timezone
 import requests
 
 from apps.core.models import Token, Message, OfferChatUser, OfferChat, Location, ExpoToken
 
-
+@sync_to_async
 def send_push_notification(token, title, body):
     url = 'https://exp.host/--/api/v2/push/send'
     headers = {

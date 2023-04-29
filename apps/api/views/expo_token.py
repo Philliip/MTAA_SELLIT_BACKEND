@@ -21,7 +21,7 @@ class ExpoTokenManagement(SecuredView):
         expo_push_token = data.get('expotoken')
 
         try:
-            expo_token = ExpoToken.objects.get(token__iexact=expo_push_token).first()
+            expo_token = ExpoToken.objects.get(token__iexact=expo_push_token)
             expo_token.user = request.user
         except ExpoToken.DoesNotExist:
 
