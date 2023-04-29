@@ -92,9 +92,9 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         OfferChat.objects.filter(id=offer_chat_id).update(updated_at=timezone.now())
         return message
 
-    @database_sync_to_async
+    @sync_to_async
     def get_expo_tokens(self, user_id):
-        expo_tokens = ExpoToken.objects.filter(user_id=user_id)
+        expo_tokens = list(ExpoToken.objects.filter(user_id=user_id))
         return expo_tokens
 
     # Receive message from activity group
