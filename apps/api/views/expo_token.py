@@ -25,13 +25,8 @@ class ExpoTokenManagement(SecuredView):
             expo_token.user = request.user
         except ExpoToken.DoesNotExist:
 
-            form = ExpoForm.Create.create_from_request(request)
-
-            if not form.is_valid():
-                raise ValidationException(request, form)
-
             expo_token = ExpoToken()
-            form.populate(expo_token)
+            expo_token.token = expo_push_token
             expo_token.user = request.user
 
         expo_token.save()
