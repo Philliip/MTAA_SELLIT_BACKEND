@@ -1,3 +1,7 @@
+"""
+Code source: https://github.com/backbonesk/django-project-template
+"""
+
 from http import HTTPStatus
 
 from django.conf import settings
