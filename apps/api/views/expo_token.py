@@ -11,7 +11,7 @@ from apps.api.response import SingleResponse
 from apps.core.models import ExpoToken
 
 
-class OfferManagement(SecuredView):
+class ExpoTokenManagement(SecuredView):
 
     @transaction.atomic
     def post(self, request):
