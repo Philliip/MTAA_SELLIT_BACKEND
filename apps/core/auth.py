@@ -1,3 +1,8 @@
+"""
+Code source: https://github.com/backbonesk/django-project-template
+"""
+
+
 import datetime
 from http import HTTPStatus
 from typing import Optional
