@@ -1,3 +1,7 @@
+"""
+Code source: https://github.com/backbonesk/django-project-template
+"""
+
 import traceback
 from enum import Enum
 from http import HTTPStatus
