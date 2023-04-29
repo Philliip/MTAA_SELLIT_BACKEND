@@ -67,7 +67,10 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
 
         expo_tokens = await self.get_expo_tokens(user_id)
         for expo_token in expo_tokens:
-            await send_push_notification(expo_token, title, body)
+            print(f"Sending push notification for token: {expo_token}")
+            result = await send_push_notification(expo_token, title, body)
+            if not result:
+                print(f"Failed to send push notification for token: {expo_token}")
 
         # Send message to activity group
         await self.channel_layer.group_send(
