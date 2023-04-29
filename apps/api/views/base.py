@@ -1,3 +1,7 @@
+"""
+Code source: https://github.com/backbonesk/django-project-template
+"""
+
 import hashlib
 import hmac
 from http import HTTPStatus
