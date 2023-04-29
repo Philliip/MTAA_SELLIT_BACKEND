@@ -10,8 +10,7 @@ import requests_async as requests
 
 from apps.core.models import Token, Message, OfferChatUser, OfferChat, Location, ExpoToken
 
-@sync_to_async
-def send_push_notification(token, title, body):
+async def send_push_notification(token, title, body):
     url = 'https://exp.host/--/api/v2/push/send'
     headers = {
         'Content-Type': 'application/json',
@@ -24,7 +23,12 @@ def send_push_notification(token, title, body):
 
     response = await requests.post(url, headers=headers, json=data)
 
-    print(response.status_code)
+    if response.status_code == 200:
+        return True
+    else:
+        print(f"Failed to send push notification: {response.text}")
+        return False
+
 
 
 class OfferChatConsumer(AsyncWebsocketConsumer):
