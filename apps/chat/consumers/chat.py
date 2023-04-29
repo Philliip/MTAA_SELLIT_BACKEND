@@ -5,7 +5,8 @@ from channels.db import database_sync_to_async
 from django.utils import timezone
 import requests
 
-from apps.core.models import Token, Message, OfferChatUser, OfferChat, Location
+from apps.core.models import Token, Message, OfferChatUser, OfferChat, Location, ExpoToken
+
 
 def send_push_notification(token, title, body):
     url = 'https://exp.host/--/api/v2/push/send'
@@ -58,11 +59,12 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
 
         message_obj = await self.save_message(user_id, self.offer_chat_id, content=message, location=location)
 
-        # Send push notification
-        token = "ExponentPushToken[PcNhsMFgxq_Y6cDwa9rlKD]"
         title = f"New message from {username}"
         body = message
-        send_push_notification(token, title, body)  # Add this line
+
+        expo_tokens = await self.get_expo_tokens(user_id)
+        for expo_token in expo_tokens:
+            send_push_notification(expo_token, title, body)
 
         # Send message to activity group
         await self.channel_layer.group_send(
@@ -86,6 +88,11 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
                                          location=location_obj)
         OfferChat.objects.filter(id=offer_chat_id).update(updated_at=timezone.now())
         return message
+
+    @database_sync_to_async
+    def get_expo_tokens(self, user_id):
+        expo_tokens = ExpoToken.objects.filter(user_id=user_id)
+        return expo_tokens
 
     # Receive message from activity group
     async def chat_message(self, event):

@@ -9,3 +9,4 @@ from .location import Location
 from .offer_chat import OfferChat
 from .offer_chat_user import OfferChatUser
 from .message import Message
+from .expo_token import ExpoToken
