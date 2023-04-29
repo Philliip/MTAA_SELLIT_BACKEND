@@ -1,3 +1,7 @@
+"""
+Code source: https://github.com/backbonesk/django-project-template
+"""
+
 from django.db.models import QuerySet
 from django.utils import timezone
 
