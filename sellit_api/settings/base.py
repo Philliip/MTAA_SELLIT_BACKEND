@@ -185,26 +185,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 1024 * 1024 * 50  # 50MB
 
-# Sentry
-if os.getenv('SENTRY_DSN', False):
-    def before_send(event, hint):
-        if 'exc_info' in hint:
-            exc_type, exc_value, tb = hint['exc_info']
-            if exc_type.__name__ in ['ValidationException']:
-                return None
-        if 'extra' in event and not event['extra'].get('to_sentry', True):
-            return None
-
-        return event
-
-    sentry_sdk.init(
-        integrations=[DjangoIntegration()],
-        attach_stacktrace=True,
-        send_default_pii=True,
-        request_bodies='always',
-        before_send=before_send,
-    )
-
 # Pagination
 PAGINATION = {
     'DEFAULT_LIMIT': 10
