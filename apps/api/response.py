@@ -1,3 +1,8 @@
+"""
+Code source: https://github.com/backbonesk/django-project-template
+"""
+
+
 import json
 from dataclasses import dataclass, field
 from http import HTTPStatus
