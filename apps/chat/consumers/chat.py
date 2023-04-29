@@ -6,7 +6,7 @@ from asgiref.sync import sync_to_async
 
 
 from django.utils import timezone
-import requests
+import requests_async as requests
 
 from apps.core.models import Token, Message, OfferChatUser, OfferChat, Location, ExpoToken
 
@@ -22,13 +22,9 @@ def send_push_notification(token, title, body):
         'body': body,
     }
 
-    response = requests.post(url, headers=headers, json=data)
+    response = await requests.post(url, headers=headers, json=data)
 
-    if response.status_code == 200:
-        return True
-    else:
-        print(f"Failed to send push notification: {response.text}")
-        return False
+    print(response.status_code)
 
 
 class OfferChatConsumer(AsyncWebsocketConsumer):
