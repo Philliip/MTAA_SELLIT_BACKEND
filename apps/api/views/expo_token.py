@@ -1,6 +1,8 @@
 import mimetypes
 import uuid
+import json
 
+from apps.api.serializers.expo_token import ExpoTokenSerializer
 from apps.api.views.base import SecuredView
 from http import HTTPStatus
 from django.db import transaction
@@ -15,14 +17,14 @@ class ExpoTokenManagement(SecuredView):
 
     @transaction.atomic
     def post(self, request):
-        expo_push_token = request.POST.get('expotoken')
+        data = json.loads(request.body.decode('utf-8'))
+        expo_push_token = data.get('expotoken')
 
-        expo_token = ExpoToken.objects.filter(token__iexact=expo_push_token).first()
-
-        if expo_token:
+        try:
+            expo_token = ExpoToken.objects.get(token__iexact=expo_push_token).first()
             expo_token.user = request.user
+        except ExpoToken.DoesNotExist:
 
-        else:
             form = ExpoForm.Create.create_from_request(request)
 
             if not form.is_valid():
@@ -34,4 +36,4 @@ class ExpoTokenManagement(SecuredView):
 
         expo_token.save()
 
-        return SingleResponse(request, status=HTTPStatus.CREATED)
+        return SingleResponse(request, expo_token, serializer=ExpoTokenSerializer.Base, status=HTTPStatus.CREATED)
