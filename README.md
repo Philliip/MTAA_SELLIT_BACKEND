@@ -2,6 +2,7 @@
 
 MTTA school project
 ### Credits to @backbonesk and their project django-project-template which was used as a tempplate for our project
+#### https://github.com/backbonesk/django-project-template
 
 
 ## Database basic setup
