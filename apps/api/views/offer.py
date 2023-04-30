@@ -141,7 +141,7 @@ class OfferChatManagement(SecuredView):
             return False
 
     def get_expo_token_obj(self, user):
-        return ExpoToken.objects.get(user=user)
+        return ExpoToken.objects.filter(user=user)
 
     @transaction.atomic
     def post(self, request, offer_id: UUID):
@@ -156,6 +156,7 @@ class OfferChatManagement(SecuredView):
             OfferChatUser.objects.create(offer_chat=offer_chat, user=request.user)
 
         expo_token_obj = self.get_expo_token_obj(offer.user)
-        self.send_push_notification(expo_token_obj.token, "New reaction", "Somebody reacted on your offer")
+        for token_obj in expo_token_obj:
+            self.send_push_notification(token_obj.token, "New reaction", "Somebody reacted on your offer")
 
         return SingleResponse(request, offer_chat, serializer=OfferChatSerializer.Base, status=HTTPStatus.CREATED)
