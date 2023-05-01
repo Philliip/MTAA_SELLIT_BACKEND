@@ -18,7 +18,7 @@ from apps.api.forms.user import UserForm
 from apps.api.response import SingleResponse, PaginationResponse
 from django.http import FileResponse
 
-from apps.core.models import OfferChat, Message
+from apps.core.models import OfferChat, Message, OfferChatUser
 from apps.core.models.user import User
 from apps.api.serializers.user import UserSerializer
 
@@ -106,12 +106,14 @@ class UserMe(SecuredView):
 
 
 class UserProfileImage(SecuredView):
+    EXEMPT_AUTH = ['GET']
+    EXEMPT_API_KEY = ['GET']
 
     def get(self, request, user_id: UUID):
 
         user = _get_user(request, user_id)
 
-        return FileResponse(user.image, as_attachment=True, filename=user.image.name)
+        return FileResponse(user.image, filename=user.image.name)
 
     @transaction.atomic
     def put(self, request, user_id: UUID):
@@ -163,12 +165,24 @@ class UserChat(SecuredView):
                 annotate(last_message_id=Subquery(last_message.values('id')[:1])). \
                 annotate(last_message_content=Subquery(last_message.values('content')[:1])). \
                 annotate(last_message_user=Subquery(last_message.values('user__username')[:1])). \
+                annotate(user_name=Subquery(
+                OfferChatUser.objects.filter(offer_chat=OuterRef('pk')).exclude(user_id=user_id).values(
+                    'user__username')[:1])). \
+                annotate(user_image=Subquery(
+                OfferChatUser.objects.filter(offer_chat=OuterRef('pk')).exclude(user_id=user_id).values('user__image')[
+                :1])). \
                 order_by('-updated_at')
         else:
             offer_chats = OfferChat.objects.filter(chat_users__user_id=user_id, chat_users__owner=False). \
                 annotate(last_message_id=Subquery(last_message.values('id')[:1])). \
                 annotate(last_message_content=Subquery(last_message.values('content')[:1])). \
                 annotate(last_message_user=Subquery(last_message.values('user__username')[:1])). \
+                annotate(user_name=Subquery(
+                OfferChatUser.objects.filter(offer_chat=OuterRef('pk')).exclude(user_id=user_id).values(
+                    'user__username')[:1])). \
+                annotate(user_image=Subquery(
+                OfferChatUser.objects.filter(offer_chat=OuterRef('pk')).exclude(user_id=user_id).values('user__image')[
+                :1])). \
                 order_by('-updated_at')
 
         return PaginationResponse(request, offer_chats, serializer=OfferChatSerializer.User,

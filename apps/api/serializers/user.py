@@ -7,6 +7,7 @@ from porcupine.base import Serializer
 class UserSerializer:
     class Base(Serializer):
         id: UUID
+        username: str
         email: str
         name: str
         surname: str

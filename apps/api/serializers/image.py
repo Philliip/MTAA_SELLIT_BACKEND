@@ -13,4 +13,4 @@ class ImageSerializer:
 
         @staticmethod
         def resolve_url(data: Image, **kwargs) -> str:
-            return urllib.parse.urljoin(settings.BASE_URL, f"images/{str(data.id)}")
+            return urllib.parse.urljoin(settings.BASE_URL, f"api/v1/images/{str(data.id)}")

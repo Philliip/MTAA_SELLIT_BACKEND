@@ -1,5 +1,6 @@
 import mimetypes
 import uuid
+import requests
 from uuid import UUID
 from django.db.models import F
 from apps.api.filters.offer import OfferFilter
@@ -12,12 +13,14 @@ from django.db import transaction
 from django.utils.translation import gettext as _
 from apps.api.errors import ValidationException, ProblemDetailException
 from apps.api.forms.offer import OfferForm
-from apps.core.models import OfferChat, Offer, Image, OfferChatUser
+from apps.core.models import OfferChat, Offer, Image, OfferChatUser, ExpoToken
 from apps.api.response import SingleResponse, PaginationResponse
 from object_checker.base_object_checker import has_object_permission
 
 
+
 class OfferManagement(SecuredView):
+    EXEMPT_AUTH = ['GET']
 
     @transaction.atomic
     def post(self, request):
@@ -59,6 +62,7 @@ def _get_offer(request, offer_id: UUID) -> Offer:
         raise ProblemDetailException(request, _("Offer not found"), status=HTTPStatus.NOT_FOUND, previous=e)
     return offer
 class OfferDetail(SecuredView):
+    EXEMPT_AUTH = ['GET']
 
     @transaction.atomic
     def get(self, request, offer_id: UUID):
@@ -116,6 +120,29 @@ class OfferDetail(SecuredView):
 
 
 class OfferChatManagement(SecuredView):
+
+    def send_push_notification(self, token, title, body):
+        url = 'https://exp.host/--/api/v2/push/send'
+        headers = {
+            'Content-Type': 'application/json',
+        }
+        data = {
+            'to': token,
+            'title': title,
+            'body': body,
+        }
+
+        response = requests.post(url, headers=headers, json=data)
+
+        if response.status_code == 200:
+            return True
+        else:
+            print(f"Failed to send push notification: {response.text}")
+            return False
+
+    def get_expo_token_obj(self, user):
+        return ExpoToken.objects.filter(user=user)
+
     @transaction.atomic
     def post(self, request, offer_id: UUID):
 
@@ -124,9 +151,12 @@ class OfferChatManagement(SecuredView):
         try:
             offer_chat = OfferChat.objects.get(offer_id=offer_id, chat_users__user=request.user)
         except OfferChat.DoesNotExist:
-
             offer_chat = OfferChat.objects.create(offer_id=offer_id)
             OfferChatUser.objects.create(offer_chat=offer_chat, user=offer.user, owner=True)
             OfferChatUser.objects.create(offer_chat=offer_chat, user=request.user)
+
+        expo_token_obj = self.get_expo_token_obj(offer.user)
+        for token_obj in expo_token_obj:
+            self.send_push_notification(token_obj.token, "New reaction", "Somebody reacted on your offer")
 
         return SingleResponse(request, offer_chat, serializer=OfferChatSerializer.Base, status=HTTPStatus.CREATED)

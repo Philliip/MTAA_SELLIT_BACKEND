@@ -16,6 +16,8 @@ class OfferChatSerializer:
         last_message_id: UUID = None
         last_message_content: str = None
         last_message_user: str = None
+        user_name: str = None
+        user_image: str = None
 
 
 

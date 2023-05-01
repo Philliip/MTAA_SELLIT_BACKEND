@@ -9,8 +9,8 @@ class Location(BaseModel):
         db_table = 'locations'
         default_permissions = ()
 
-    location_string = models.CharField(max_length=255, null=False, verbose_name=_('location_message'))
-    location_coordinates = models.CharField(max_length=255, null=False, verbose_name=_('coordinates_message'))
+    longitude = models.CharField(max_length=255, null=False, verbose_name=_('location_message'))
+    latitude = models.CharField(max_length=255, null=False, verbose_name=_('coordinates_message'))
 
 
 

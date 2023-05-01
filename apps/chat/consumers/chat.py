@@ -4,26 +4,22 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from django.utils import timezone
 
-from apps.core.models import Token, Message, OfferChatUser, OfferChat
+
+from apps.core.models import Message, OfferChatUser, OfferChat, Location
 
 
 class OfferChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
 
         self.offer_chat_id = self.scope['url_route']['kwargs']['offer_chat_id']
-        self.user = await self.authenticate_user(self.scope['headers'])
         self.last_message = None
 
-        if self.user:
-            # Join activity group
-            await self.channel_layer.group_add(
-                self.offer_chat_id,
-                self.channel_name
-            )
+        await self.channel_layer.group_add(
+            self.offer_chat_id,
+            self.channel_name
+        )
 
-            await self.accept()
-        else:
-            await self.close()
+        await self.accept()
 
     # Leave activity chat
     async def disconnect(self, close_code):
@@ -36,21 +32,33 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
+        location = text_data_json['location']
         message = text_data_json['message']
+        user_id = text_data_json['user_id']
+        username = text_data_json['username']
 
-        message_obj = await self.save_message(self.user, self.offer_chat_id, message)
+        message_obj = await self.save_message(user_id, self.offer_chat_id, content=message, location=location)
 
         # Send message to activity group
         await self.channel_layer.group_send(
             self.offer_chat_id, {'type': 'chat_message',
+                                 "user_id": user_id,
                                  'message': message,
-                                 "username": self.user.username,
-                                 "created_at": message_obj.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+                                 "username": username,
+                                 "created_at": message_obj.created_at.strftime("%Y-%m-%d %H:%M:%S"),
+                                 "location": location}
         )
 
     @database_sync_to_async
-    def save_message(self, user, offer_chat_id, content):
-        message = Message.objects.create(user=user, offer_chat_id=offer_chat_id, content=content)
+    def save_message(self, user_id, offer_chat_id, content=None, location=None):
+        location_obj = None
+        if location:
+            longitude = content.split(':')[0]
+            latitude = content.split(':')[1]
+            location_obj = Location.objects.create(longitude=longitude, latitude=latitude)
+
+        message = Message.objects.create(user_id=user_id, offer_chat_id=offer_chat_id, content=content,
+                                         location=location_obj)
         OfferChat.objects.filter(id=offer_chat_id).update(updated_at=timezone.now())
         return message
 
@@ -59,31 +67,10 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         message = event['message']
         username = event['username']
         created_at = event['created_at']
-
+        location = event['location']
+        user_id = event['user_id']
         # Send message to WebSocket
-        await self.send(text_data=json.dumps({"username": username, "message": message, "created_at": created_at}))
+        await self.send(text_data=json.dumps({"username": username, "message": message, "created_at": created_at,
+                                              "location": location, "user_id": user_id}))
 
-    @database_sync_to_async
-    def check_user(self, token_key):
 
-        try:
-            token = Token.objects.get(pk=token_key)
-
-        except Token.DoesNotExist:
-            return None
-
-        if not OfferChatUser.objects.filter(offer_chat_id=self.offer_chat_id, user=token.user).exists():
-            return None
-
-        return token.user
-
-    async def authenticate_user(self, headers):
-        headers_dict = dict(headers)
-        auth_header = headers_dict.get(b'authorization')
-
-        if auth_header:
-            token_key = auth_header.decode().split(" ")[1]
-            user = await self.check_user(token_key)
-            return user
-
-        return None

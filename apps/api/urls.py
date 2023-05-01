@@ -1,6 +1,6 @@
 from django.urls import path
 
-from apps.api.views import user, api_key, auth, city, category, image, offer, chat
+from apps.api.views import user, api_key, auth, city, category, image, offer, chat, expo_token
 
 urlpatterns = [
 
@@ -30,5 +30,7 @@ urlpatterns = [
 
     path('chats/<uuid:offer_chat_id>/users', chat.ChatUser.as_view()),
     path('chats/<uuid:offer_chat_id>/messages', chat.ChatMessage.as_view()),
+
+    path('expotoken', expo_token.ExpoTokenManagement.as_view()),
 
 ]
