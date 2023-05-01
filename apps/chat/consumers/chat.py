@@ -72,5 +72,3 @@ class OfferChatConsumer(AsyncWebsocketConsumer):
         # Send message to WebSocket
         await self.send(text_data=json.dumps({"username": username, "message": message, "created_at": created_at,
                                               "location": location, "user_id": user_id}))
-
-

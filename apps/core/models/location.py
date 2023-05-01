@@ -11,6 +11,3 @@ class Location(BaseModel):
 
     longitude = models.CharField(max_length=255, null=False, verbose_name=_('location_message'))
     latitude = models.CharField(max_length=255, null=False, verbose_name=_('coordinates_message'))
-
-
-

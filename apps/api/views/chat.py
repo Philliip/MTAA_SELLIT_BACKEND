@@ -1,7 +1,4 @@
-import mimetypes
-import uuid
 from uuid import UUID
-from django.db.models import F
 from apps.api.filters.message import MessageFilter
 from apps.api.serializers.message import MessageSerializer
 from apps.api.serializers.offer_chat_user import OfferChatUserSerializer
@@ -9,9 +6,8 @@ from apps.api.views.base import SecuredView
 from http import HTTPStatus
 from django.db import transaction
 from django.utils.translation import gettext as _
-from apps.api.errors import ValidationException, ProblemDetailException
-from apps.api.forms.offer import OfferForm
-from apps.core.models import OfferChat, Offer, Image, OfferChatUser, Message
+from apps.api.errors import ProblemDetailException
+from apps.core.models import OfferChatUser, Message
 from apps.api.response import SingleResponse, PaginationResponse
 from object_checker.base_object_checker import has_object_permission
 
@@ -26,6 +22,7 @@ class ChatUser(SecuredView):
 
         return PaginationResponse(request, offer_chat_users, serializer=OfferChatUserSerializer.Base,
                                   status=HTTPStatus.OK)
+
 
 class ChatMessage(SecuredView):
 
@@ -47,6 +44,7 @@ class ChatMessage(SecuredView):
                                      request=request).qs
 
         return PaginationResponse(request, messages, serializer=MessageSerializer.Base, status=HTTPStatus.OK)
+
 
 class ChatMessagesDetail(SecuredView):
 

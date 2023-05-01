@@ -2,11 +2,7 @@
 Code source: https://github.com/backbonesk/django-project-template
 """
 
-
-import datetime
 from http import HTTPStatus
-from typing import Optional
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.core.exceptions import ValidationError

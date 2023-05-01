@@ -25,4 +25,3 @@ class UserChecker(AbacChecker):
             return True
 
         return False
-

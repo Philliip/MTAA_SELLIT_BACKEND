@@ -13,7 +13,7 @@ class Offer(BaseModel):
     description = models.CharField(max_length=255, null=False, verbose_name=_('offer_description'))
     price = models.DecimalField(null=False, max_digits=5, decimal_places=2)
     category = models.ForeignKey('Category', on_delete=models.CASCADE, null=True, related_name='offers',
-                             verbose_name=_('offer_category'))
+                                 verbose_name=_('offer_category'))
 
     city = models.ForeignKey('City', on_delete=models.CASCADE, null=True, related_name='offers',
                              verbose_name=_('offer_city'))
@@ -22,4 +22,3 @@ class Offer(BaseModel):
 
     user = models.ForeignKey('User', on_delete=models.CASCADE, null=False, related_name='offers',
                              verbose_name=_('post_user'))
-

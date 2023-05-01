@@ -1,14 +1,8 @@
-import mimetypes
-import uuid
 import json
-
 from apps.api.serializers.expo_token import ExpoTokenSerializer
 from apps.api.views.base import SecuredView
 from http import HTTPStatus
 from django.db import transaction
-
-from apps.api.errors import ValidationException
-from apps.api.forms.expo_token import ExpoForm
 from apps.api.response import SingleResponse
 from apps.core.models import ExpoToken
 

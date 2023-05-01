@@ -11,4 +11,3 @@ class City(BaseModel):
 
     name = models.CharField(max_length=255, null=False, verbose_name=_('city_name'))
     zip = models.CharField(max_length=10, null=False, verbose_name=_('city_zip'))
-

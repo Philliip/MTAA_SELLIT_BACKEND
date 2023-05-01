@@ -43,4 +43,3 @@ class ImageDetail(SecuredView):
         image.hard_delete()
 
         return SingleResponse(request, status=HTTPStatus.NO_CONTENT)
-

@@ -6,7 +6,6 @@ from django.db.models import F
 from apps.api.filters.offer import OfferFilter
 from apps.api.serializers.offer import OfferSerializer
 from apps.api.serializers.offer_chat import OfferChatSerializer
-from apps.api.serializers.offer_chat_user import OfferChatUserSerializer
 from apps.api.views.base import SecuredView
 from http import HTTPStatus
 from django.db import transaction
@@ -16,7 +15,6 @@ from apps.api.forms.offer import OfferForm
 from apps.core.models import OfferChat, Offer, Image, OfferChatUser, ExpoToken
 from apps.api.response import SingleResponse, PaginationResponse
 from object_checker.base_object_checker import has_object_permission
-
 
 
 class OfferManagement(SecuredView):
@@ -55,12 +53,15 @@ class OfferManagement(SecuredView):
 
         return PaginationResponse(request, offers, serializer=OfferSerializer.Base)
 
+
 def _get_offer(request, offer_id: UUID) -> Offer:
     try:
         offer = Offer.objects.get(pk=offer_id)
     except Offer.DoesNotExist as e:
         raise ProblemDetailException(request, _("Offer not found"), status=HTTPStatus.NOT_FOUND, previous=e)
     return offer
+
+
 class OfferDetail(SecuredView):
     EXEMPT_AUTH = ['GET']
 

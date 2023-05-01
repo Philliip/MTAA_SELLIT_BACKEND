@@ -9,4 +9,3 @@ class OfferChat(BaseModel):
         default_permissions = ()
 
     offer = models.ForeignKey('Offer', null=False, related_name='chats', on_delete=models.CASCADE)
-

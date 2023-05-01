@@ -39,5 +39,4 @@ class Image(BaseModel):
     )
 
     offer = models.ForeignKey('Offer', null=True, on_delete=models.CASCADE, related_name='images',
-                             verbose_name=_('image_offer'))
-
+                              verbose_name=_('image_offer'))

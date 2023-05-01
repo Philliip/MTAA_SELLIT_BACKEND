@@ -22,7 +22,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sellit_api.settings.development
 django.setup()
 
 
-
 application = ProtocolTypeRouter({
     "http": django_asgi_app,
     "websocket": AllowedHostsOriginValidator(
